@@ -1,0 +1,9 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 22">
+<circle id="Ellipse 8" cx="20" cy="20" r="20" fill="#240046"/>
+<g id="Group">
+<path id="Vector" d="M14 15H13C12.4696 15 11.9609 15.2107 11.5858 15.5858C11.2107 15.9609 11 16.4696 11 17V26C11 26.5304 11.2107 27.0391 11.5858 27.4142C11.9609 27.7893 12.4696 28 13 28H22C22.5304 28 23.0391 27.7893 23.4142 27.4142C23.7893 27.0391 24 26.5304 24 26V25" stroke="#FF9E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M23 13.0001L26 16.0001M27.385 14.5851C27.7788 14.1913 28.0001 13.6571 28.0001 13.1001C28.0001 12.5431 27.7788 12.009 27.385 11.6151C26.9912 11.2213 26.457 11 25.9 11C25.343 11 24.8088 11.2213 24.415 11.6151L16 20.0001V23.0001H19L27.385 14.5851Z" stroke="#FF9E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>
