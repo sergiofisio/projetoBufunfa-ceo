@@ -10,6 +10,7 @@ export default {
       colors: {
         purple: "#240046",
         gold: "#FF9E00",
+        purpleLight: "#5A189A",
       },
     },
   },

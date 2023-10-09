@@ -26,7 +26,7 @@ export default function Button({
           color === "purple"
             ? "bg-purple text-white border-purple hover:bg-white hover:text-purple"
             : color === "gold"
-            ? "bg-gold text-purple border-gold hover:bg-transparent hover:text-gold"
+            ? "bg-gold text-purple text-white border-gold hover:bg-transparent hover:text-gold"
             : "bg-transparent text-purple border-transparent hover:bg-purple hover:text-white"
         } rounded-xl border-2 `}
         type={type ? type : "button"}
