@@ -22,13 +22,12 @@ export default function Button({
     <>
       <button
         className={`flex items-center justify-evenly w-full h-10 transition-all duration-300 ease-in-out 
-        ${
-          color === "purple"
-            ? "bg-purple text-white border-purple hover:bg-white hover:text-purple"
+        ${color === "purple"
+            ? "bg-purple-dark text-white border-purpleDark hover:bg-white hover:text-purpleDark"
             : color === "gold"
-            ? "bg-gold text-purple text-white border-gold hover:bg-transparent hover:text-gold"
-            : "bg-transparent text-purple border-transparent hover:bg-purple hover:text-white"
-        } rounded-xl border-2 `}
+              ? "bg-gold-dark text-purpleDark border-goldDark hover:bg-transparent hover:text-goldDark"
+              : "bg-transparent text-purpleDark border-transparent hover:bg-purpleDark hover:text-white"
+          } rounded-xl border-2 `}
         type={type ? type : "button"}
         onClick={onClick}
         onMouseEnter={() => {
@@ -45,8 +44,8 @@ export default function Button({
               color === "purple"
                 ? imgGearGold
                 : color === "gold"
-                ? imgGearPurple
-                : imgGearPurple
+                  ? imgGearPurple
+                  : imgGearPurple
             }
             alt="icon setting"
           />
@@ -57,8 +56,8 @@ export default function Button({
               color === "purple"
                 ? imgGearPurple
                 : color === "gold"
-                ? imgGearGold
-                : imgGearWhite
+                  ? imgGearGold
+                  : imgGearWhite
             }
             alt="icon setting"
           />
