@@ -1,27 +1,78 @@
+import { useState } from "react";
 import DefaultHeader from "../../components/DefaultHeader/DeafultHeader";
 import Button from "../../components/button/button";
 import Input from "../../components/input/input";
 import { Link } from "react-router-dom";
+import { validadeInputs } from "../../utils/verifyErrors";
+import { toastfy } from "../../hooks/toasfy";
+import axiosPrivate from "../../connection";
+import { setItem } from "../../utils/storage";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [stayConnected, setStayConnected] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      if (!email || !password) {
+        throw new Error("Preencha todos os campos!");
+      }
+      const login = await axiosPrivate.post("/login/ceo", {
+        email,
+        password,
+      });
+
+      toastfy("Bem vindo!", "toast-error", 3000);
+      if (stayConnected) {
+        setItem("token", login.data.token, true);
+      }
+    } catch (error: any) {
+      console.log(error);
+
+      if (error.response.status === 403)
+        return toastfy(error.response.data.error, "toast-error", 3000);
+
+      toastfy(error.message || error.response.data.error, "toast-error", 3000);
+    }
+  }
+
   return (
-    <div className={`w-screen h-screen bg-purple flex flex-col`}>
+    <div className={`w-full min-h-full  flex flex-col justify-evenly`}>
       <DefaultHeader />
-      <div className={`w-full h-full`}>
-        <form className={`flex flex-col h-full px-8 pt-7 gap-6`}>
-          <Input label={`Email`} />
-          <Input label={`Senha`} />
-          <Link to={"/"} className={`text-white pl-5`}>
-            Esqueci a minha senha
-          </Link>
-          <div className={`h-8 flex items-center`}>
+      <div className={`w-full flex flex-col`}>
+        <form
+          onSubmit={handleSubmit}
+          className={`flex flex-col justify-around items-center gap-6 px-8`}
+        >
+          <div className="w-full flex flex-col items-center justify-center gap-4">
+            <Input label="Email" type="text" set={setEmail} value={email} />
+            <Input
+              label="Senha"
+              type="password"
+              set={setPassword}
+              value={password}
+            />
+            <Link to={"/"} className={`text-white text-xs underline`}>
+              Esqueci a minha senha
+            </Link>
+          </div>
+          <div
+            onClick={(e) => setStayConnected(!stayConnected)}
+            className={`w-full flex items-center cursor-pointer`}
+          >
             <input
               type="checkbox"
-              className={`h-7 w-7 accent-purple  border-2 border-white`}
+              className={`h-7 w-7 border-2 border-white rounded-3xl cursor-pointer`}
+              onChange={(e) => setStayConnected(e.target.checked)}
+              checked={stayConnected}
             />
-            <p className={`text-white ml-2`}>Me manter conectado</p>
+            <label className={`text-white ml-2`}>Me manter conectado</label>
           </div>
-          <div className={`flex flex-col gap-5 h-full justify-center`}>
+          <div className={`w-full flex flex-col gap-5  justify-center`}>
             <Button type={`submit`} color="gold" text="Fazer Login" />
             <Link
               className={`w-full flex text-center justify-center text-white`}

@@ -14,14 +14,14 @@ export default function Input({
 }: {
   label: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
   set: React.Dispatch<React.SetStateAction<string>>;
   value: string | number;
   required?: boolean;
   mask?: string;
 }) {
   return (
-    <div className="w-full text-white flex flex-col gap-2">
+    <div className="w-full h-16 text-white flex flex-col gap-2">
       <label className="capitalize">{label}</label>
       {type === "textarea" ? (
         <textarea
@@ -34,7 +34,7 @@ export default function Input({
         />
       ) : (
         <InputMask
-          className="outline-none text-black rounded-xl px-2"
+          className="outline-none h-full text-black rounded-xl px-2"
           mask={mask || ""}
           type={type}
           placeholder={placeholder}
