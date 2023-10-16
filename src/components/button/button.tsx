@@ -11,8 +11,8 @@ export default function Button({
   img,
 }: {
   text: string;
-  onClick?: () => void;
-  type?: "submit" | "reset";
+  onClick?: (e?: any) => void;
+  type?: "submit" | "reset" | "button";
   color: string;
   img?: boolean;
 }) {
@@ -24,7 +24,7 @@ export default function Button({
         className={`flex items-center justify-evenly w-full h-10 transition-all duration-300 ease-in-out 
         ${
           color === "purple"
-            ? "bg-purple text-white border-purpleDark hover:bg-white hover:text-purpleDark"
+            ? "bg-purpleDark text-white border-purpleDark hover:bg-white hover:text-purpleDark"
             : color === "gold"
             ? "bg-gold text-purpleDark border-goldDark hover:bg-transparent hover:text-goldDark"
             : "bg-transparent text-purpleDark border-transparent hover:bg-purpleDark hover:text-white"

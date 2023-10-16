@@ -9,7 +9,7 @@ const MainRoutes = () => {
   const [active, setActive] = useState("login");
   return (
     <Routes>
-      <Route path="/" element={<App active={active} />} />
+      <Route path="/" element={<App />} />
       <Route path="/home" element={<Home />} />
       <Route path="/newCompany" element={<CompanyCreate />} />
     </Routes>

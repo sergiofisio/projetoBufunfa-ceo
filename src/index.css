@@ -26,12 +26,3 @@
 .Toastify__toast-body > div:last-child {
   text-align: center;
 }
-
-.toast-error {
-  color: red !important;
-  width: 100%;
-  height: 100%;
-
-  border-radius: 1.5rem !important;
-  cursor: pointer;
-}
