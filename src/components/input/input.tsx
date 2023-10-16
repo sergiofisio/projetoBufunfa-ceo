@@ -24,7 +24,7 @@ export default function Input({
 }) {
   return (
     <div className="w-full text-white flex flex-col">
-      <label className={`text-textBody text-black${labelClassName}`}>
+      <label className={`text-textBody text-black ${labelClassName}`}>
         {label}
       </label>
       {type === "textarea" ? (

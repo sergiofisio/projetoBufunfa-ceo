@@ -41,6 +41,8 @@ const Login = () => {
       setItem("name", login.data.name);
       setItem("token", login.data.token);
     } catch (error: any) {
+      console.log(error);
+
       if (error.response?.status === 403)
         return toastfy(error.response.data.error, "toast-error", 3000);
 
@@ -57,9 +59,16 @@ const Login = () => {
           className={`flex flex-col justify-around items-center gap-6 px-8`}
         >
           <div className="w-full flex flex-col items-center justify-center gap-4">
-            <Input label="Email" type="text" set={setEmail} value={email} />
+            <Input
+              label="Email"
+              labelClassName="text-white"
+              type="text"
+              set={setEmail}
+              value={email}
+            />
             <Input
               label="Senha"
+              labelClassName="text-white"
               type="password"
               set={setPassword}
               value={password}
