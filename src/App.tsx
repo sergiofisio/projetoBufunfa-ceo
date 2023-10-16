@@ -4,7 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 import Home from "./pages/home";
 
-function App({ active }: { active: string }) {
+function App() {
+
   return (
     <div className="w-screen h-screen bg-transparent flex items-center justify-center">
       <div className="relative w-full h-full bg-purpleDark flex items-center justify-center">
