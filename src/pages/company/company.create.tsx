@@ -90,6 +90,7 @@ export default function CompanyCreate() {
           <div className="w-full flex flex-col gap-4">
             <Input
               label="Nome da empresa"
+              labelClassName="text-black"
               type="text"
               set={setName}
               value={name}
@@ -97,6 +98,7 @@ export default function CompanyCreate() {
             />
             <Input
               label="CNPJ da empresa"
+              labelClassName="text-black"
               type="text"
               set={setCnpj}
               value={cnpj}
@@ -104,6 +106,7 @@ export default function CompanyCreate() {
             />
             <Input
               label="Slogan da empresa"
+              labelClassName="text-black"
               type="text"
               set={setSlogan}
               value={slogan}
@@ -111,6 +114,7 @@ export default function CompanyCreate() {
             />
             <Input
               label="Descrição da empresa"
+              labelClassName="text-black"
               type="textarea"
               set={setDescription}
               value={description}
