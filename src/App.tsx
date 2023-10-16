@@ -13,13 +13,6 @@ function App() {
       <div className="relative w-full h-full bg-purpleDark flex items-center justify-center">
         {active === "login" && <Login />}
         {active === "home" && <Home />}
-        <ToastContainer
-          position="bottom-center"
-          bodyClassName="rounded-3xl"
-          className={
-            "!absolute !bottom-0 flex justify-center items-center w-full px-2 rounded-3xl"
-          }
-        />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ const Login = () => {
         password,
       });
 
-      toastfy("Bem vindo!", "toast-error", 3000);
+      toastfy("success", "Bem vindo!", "text-purple", 3000);
       setTimeout(() => {
         navigagte("/home");
       }, 4000);
@@ -41,12 +41,10 @@ const Login = () => {
       setItem("name", login.data.name);
       setItem("token", login.data.token);
     } catch (error: any) {
-      console.log(error);
-
       if (error.response?.status === 403)
-        return toastfy(error.response.data.error, "toast-error", 3000);
+        return toastfy("error", error.response.data.error, "toast-error", 3000);
 
-      toastfy(error.message, "toast-error", 3000);
+      toastfy("error", error.message, "text-red", 3000);
     }
   }
 

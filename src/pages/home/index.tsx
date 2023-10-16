@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-full bg-white">
-      <div className="flex items-center justify-center w-full h-32 rounded-b-3xl bg-purple">
+      <div className="flex items-center justify-center w-full h-32 rounded-b-3xl bg-purpleDark">
         <h2 className="text-title text-white">
           Olá,
           <span className="text-gold">
@@ -38,25 +38,33 @@ export default function Home() {
           !
         </h2>
       </div>
-      <div className="w-full h-full bg-white py-7 px-5">
+      <div className="w-full bg-white pt-7">
         <h1 className="w-full text-2xl text-center">Selecione uma empresa</h1>
-        <div className="flex flex-wrap justify-around py-4">
-          {companiesList.length &&
-            companiesList.map(({ company: { id, logo, name } }, key) => {
-              return (
-                <div className="w-32 h-40 cursor-pointer rounded-3xl" key={key}>
-                  <Company img={logo || building} name={name} />
-                </div>
-              );
-            })}
+        <div className="flex flex-wrap justify-around py-4 gap-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-purpleDark w-full max-h-[calc(100vh-12rem)]">
+          {companiesList.length
+            ? companiesList.map(({ company: { id, logo, name } }, key) => {
+                return (
+                  <div
+                    className="w-40 h-40 cursor-pointer rounded-3xl "
+                    key={key}
+                  >
+                    <Company
+                      img={logo || building}
+                      name={name}
+                      classNameH2={true}
+                    />
+                  </div>
+                );
+              })
+            : ""}
           <div
             onClick={() => {
               navigate("/newCompany");
             }}
-            className="w-32 h-40 flex flex-wrap rounded-3xl cursor-pointer"
+            className="w-40 h-40 flex flex-wrap rounded-3xl cursor-pointer"
           >
             <Company
-              classname="bg-purple p-5"
+              classname="bg-purpleDark p-5"
               img={plus}
               name="Criar empresa"
             />

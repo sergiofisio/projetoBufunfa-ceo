@@ -86,6 +86,19 @@ export default {
         ],
       },
     },
+    styles: {
+      "::-webkit-scrollbar": {
+        width: "5px",
+      },
+      "::-webkit-scrollbar-track": {
+        background: "#240046)",
+      },
+      "::-webkit-scrollbar-thumb": {
+        backgroundColor: " #240046)",
+      },
+      scrollbarWidth: "thin",
+      scrollbarColor: "#240046",
+    },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

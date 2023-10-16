@@ -1,7 +1,14 @@
 import { toast } from "react-toastify";
 
-export function toastfy(msg: string, classname: string, time: number) {
-  toast.error(msg, {
+type ToastType = "success" | "error" | "warning" | "info";
+
+export function toastfy(
+  type: ToastType,
+  msg: string,
+  classname: string,
+  time: number
+) {
+  toast[type](msg, {
     position: "bottom-center",
     autoClose: time,
     hideProgressBar: false,
@@ -9,6 +16,7 @@ export function toastfy(msg: string, classname: string, time: number) {
     draggable: false,
     icon: false,
     closeButton: false,
-    className: classname,
+    theme: "colored",
+    className: `${classname} w-full h-full !rounded-xl`,
   });
 }
