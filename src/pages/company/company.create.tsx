@@ -117,7 +117,12 @@ export default function CompanyCreate() {
             />
           </div>
           <div className="w-full">
-            <Button text="Continuar" type="submit" color="purple" />
+            <Button
+              onClick={() => setStep(2)}
+              text="Continuar"
+              type="submit"
+              color="purple"
+            />
           </div>
         </form>
       </div>
