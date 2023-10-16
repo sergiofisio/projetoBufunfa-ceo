@@ -11,7 +11,7 @@ export default function Button({
   img,
 }: {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   type?: "submit" | "reset";
   color: string;
   img?: boolean;
@@ -22,12 +22,13 @@ export default function Button({
     <>
       <button
         className={`flex items-center justify-evenly w-full h-10 transition-all duration-300 ease-in-out 
-        ${color === "purple"
+        ${
+          color === "purple"
             ? "bg-purple-dark text-white border-purpleDark hover:bg-white hover:text-purpleDark"
             : color === "gold"
-              ? "bg-gold-dark text-purpleDark border-goldDark hover:bg-transparent hover:text-goldDark"
-              : "bg-transparent text-purpleDark border-transparent hover:bg-purpleDark hover:text-white"
-          } rounded-xl border-2 `}
+            ? "bg-gold text-purpleDark border-goldDark hover:bg-transparent hover:text-goldDark"
+            : "bg-transparent text-purpleDark border-transparent hover:bg-purpleDark hover:text-white"
+        } rounded-xl border-2 `}
         type={type ? type : "button"}
         onClick={onClick}
         onMouseEnter={() => {
@@ -44,8 +45,8 @@ export default function Button({
               color === "purple"
                 ? imgGearGold
                 : color === "gold"
-                  ? imgGearPurple
-                  : imgGearPurple
+                ? imgGearPurple
+                : imgGearPurple
             }
             alt="icon setting"
           />
@@ -56,8 +57,8 @@ export default function Button({
               color === "purple"
                 ? imgGearPurple
                 : color === "gold"
-                  ? imgGearGold
-                  : imgGearWhite
+                ? imgGearGold
+                : imgGearWhite
             }
             alt="icon setting"
           />

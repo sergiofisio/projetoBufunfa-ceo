@@ -1,19 +1,22 @@
-import { MenuBar } from "./components/MenuBar";
-import { MenuTop } from "./components/MenuTop";
-import Button from "./components/button/button";
+import { ToastContainer } from "react-toastify";
+import Login from "./pages/Login";
+import "react-toastify/dist/ReactToastify.css";
+import "./index.css";
 
 function App() {
 
-  function handlerTeste() {
-    console.log("Oi");
-  }
-
   return (
     <div className="w-screen h-screen bg-white flex items-center justify-center">
-      <MenuTop label="Salário" />
-      {/* <div className="relative min-w-[20.625rem] min-h-[43.625rem] bg-purple rounded-3xl flex items-center justify-center"></div> */}
-      <Button onClick={handlerTeste} text={"click"} color={"gold"} />
-      <MenuBar />
+      <div className="relative w-[20.625rem] h-[43.625rem] bg-purpleDark rounded-3xl flex items-center justify-center">
+        <Login />
+        <ToastContainer
+          position="bottom-center"
+          bodyClassName="rounded-3xl"
+          className={
+            "!absolute !bottom-0 flex justify-center items-center w-full px-2 rounded-3xl"
+          }
+        />
+      </div>
     </div>
   );
 }
