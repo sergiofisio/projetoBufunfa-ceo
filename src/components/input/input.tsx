@@ -21,11 +21,11 @@ export default function Input({
   mask?: string;
 }) {
   return (
-    <div className="w-full h-16 text-white flex flex-col gap-2">
-      <label className="capitalize">{label}</label>
+    <div className="w-full text-white flex flex-col">
+      <label className="text-textBody text-black">{label}</label>
       {type === "textarea" ? (
         <textarea
-          className="text-black resize-none outline-none rounded-xl p-2 overflow-auto"
+          className="border-2 border-solid border-black rounded-3xl bg-white text-black resize-none outline-none p-2 overflow-auto"
           rows={3}
           placeholder={placeholder}
           value={value}
@@ -34,7 +34,7 @@ export default function Input({
         />
       ) : (
         <InputMask
-          className="outline-none h-full text-black rounded-xl px-2"
+          className="border-2 border-solid border-black rounded-3xl bg-white outline-none h-full text-black px-2"
           mask={mask || ""}
           type={type}
           placeholder={placeholder}

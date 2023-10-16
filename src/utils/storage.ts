@@ -1,4 +1,4 @@
-export function setItem(key: string, value: string, local: boolean) {
+export function setItem(key: string, value: string, local?: boolean) {
   if (local) return localStorage.setItem(key, value);
   sessionStorage.setItem(key, value);
 }

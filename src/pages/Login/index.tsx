@@ -2,13 +2,13 @@ import { useState } from "react";
 import DefaultHeader from "../../components/DefaultHeader/DeafultHeader";
 import Button from "../../components/button/button";
 import Input from "../../components/input/input";
-import { Link } from "react-router-dom";
-import { validadeInputs } from "../../utils/verifyErrors";
+import { Link, useNavigate } from "react-router-dom";
 import { toastfy } from "../../hooks/toasfy";
 import axiosPrivate from "../../connection";
 import { setItem } from "../../utils/storage";
 
 const Login = () => {
+  const navigagte = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [stayConnected, setStayConnected] = useState(false);
@@ -27,16 +27,24 @@ const Login = () => {
       });
 
       toastfy("Bem vindo!", "toast-error", 3000);
-      if (stayConnected) {
-        setItem("token", login.data.token, true);
-      }
-    } catch (error: any) {
-      console.log(error);
+      setTimeout(() => {
+        navigagte("/home");
+      }, 4000);
 
-      if (error.response.status === 403)
+      console.log(login);
+
+      if (stayConnected) {
+        setItem("name", login.data.user.name, true);
+        return setItem("token", login.data.token, true);
+      }
+
+      setItem("name", login.data.name);
+      setItem("token", login.data.token);
+    } catch (error: any) {
+      if (error.response?.status === 403)
         return toastfy(error.response.data.error, "toast-error", 3000);
 
-      toastfy(error.message || error.response.data.error, "toast-error", 3000);
+      toastfy(error.message, "toast-error", 3000);
     }
   }
 

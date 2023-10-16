@@ -24,11 +24,11 @@ export default function Button({
         className={`flex items-center justify-evenly w-full h-10 transition-all duration-300 ease-in-out 
         ${
           color === "purple"
-            ? "bg-purple-dark text-white border-purpleDark hover:bg-white hover:text-purpleDark"
+            ? "bg-purple text-white border-purpleDark hover:bg-white hover:text-purpleDark"
             : color === "gold"
             ? "bg-gold text-purpleDark border-goldDark hover:bg-transparent hover:text-goldDark"
             : "bg-transparent text-purpleDark border-transparent hover:bg-purpleDark hover:text-white"
-        } rounded-xl border-2 `}
+        } rounded-3xl border-2 `}
         type={type ? type : "button"}
         onClick={onClick}
         onMouseEnter={() => {
