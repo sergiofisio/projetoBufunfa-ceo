@@ -4,6 +4,7 @@ import InputMask from "react-input-mask";
 
 export default function Input({
   label,
+  labelClassName,
   type,
   placeholder,
   set,
@@ -13,6 +14,7 @@ export default function Input({
   ...props
 }: {
   label: string;
+  labelClassName: string;
   type: string;
   placeholder?: string;
   set: React.Dispatch<React.SetStateAction<string>>;
@@ -22,7 +24,9 @@ export default function Input({
 }) {
   return (
     <div className="w-full text-white flex flex-col">
-      <label className="text-textBody text-black">{label}</label>
+      <label className={`text-textBody text-black${labelClassName}`}>
+        {label}
+      </label>
       {type === "textarea" ? (
         <textarea
           className="border-2 border-solid border-black rounded-3xl bg-white text-black resize-none outline-none p-2 overflow-auto"
