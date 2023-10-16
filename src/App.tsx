@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
 function App() {
+
   return (
     <div className="w-screen h-screen bg-white flex items-center justify-center">
       <div className="relative w-[20.625rem] h-[43.625rem] bg-purpleDark rounded-3xl flex items-center justify-center">
