@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toastfy } from "../../hooks/toasfy";
 import axiosPrivate from "../../connection";
 import { setItem } from "../../utils/storage";
+import userImg from "../../assets/user.svg";
 
 const Login = () => {
   const navigagte = useNavigate();
@@ -31,13 +32,21 @@ const Login = () => {
         navigagte("/home");
       }, 4000);
 
+      let photo = login.data.user.photo;
+
+      if (!photo) {
+        photo = userImg;
+      }
+
       if (stayConnected) {
         setItem("id", login.data.user.id, true);
         setItem("name", login.data.user.name, true);
+        setItem("photo", photo, true);
         return setItem("token", login.data.token, true);
       }
-      setItem("id", login.data.user.id, true);
+      setItem("id", login.data.user.id);
       setItem("name", login.data.name);
+      setItem("photo", photo);
       setItem("token", login.data.token);
     } catch (error: any) {
       if (error.response?.status === 403)

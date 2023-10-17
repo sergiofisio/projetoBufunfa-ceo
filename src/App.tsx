@@ -15,8 +15,6 @@ function App() {
   const [step, setStep] = useState(1);
   const [imgInfo, setImgInfo] = useState(img1);
 
-  console.log({ step });
-
   function handleClickArrow(e: React.MouseEvent, arrow: string) {
     e.preventDefault();
     e.stopPropagation();

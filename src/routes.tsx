@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/home";
 import CompanyCreate from "./pages/company/company.create";
-import CompanyInfo from "./pages/company/company.info";
 import { useState } from "react";
 import Login from "./pages/Login";
+import Company from "./pages/company/company";
 
 const MainRoutes = () => {
   const [company, setCompany] = useState("");
@@ -15,7 +15,7 @@ const MainRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<Home setCompany={setCompany} />} />
       <Route path="/newCompany" element={<CompanyCreate />} />
-      <Route path="/info" element={<CompanyInfo company={company} />} />
+      <Route path="/info" element={<Company company={company} />} />
     </Routes>
   );
 };
