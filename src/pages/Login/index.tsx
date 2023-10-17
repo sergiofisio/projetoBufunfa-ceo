@@ -31,8 +31,6 @@ const Login = () => {
         navigagte("/home");
       }, 4000);
 
-      console.log(login);
-
       if (stayConnected) {
         setItem("name", login.data.user.name, true);
         return setItem("token", login.data.token, true);
