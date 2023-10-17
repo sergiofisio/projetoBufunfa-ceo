@@ -1,7 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 
+// const url = "https://bufunfa.onrender.com";
+const url = "http://localhost:4000";
+
 const axiosPrivate: Readonly<AxiosInstance> = axios.create({
-  baseURL: "https://bufunfa.onrender.com",
+  baseURL: url,
   timeout: 5000,
   headers: { "Content-Type": "application/json" },
 });

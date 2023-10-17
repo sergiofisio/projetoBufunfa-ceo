@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import axiosPrivate from "../../connection";
 import Company from "./../../components/company/company";
-import building from "../../assets/building.svg";
 import plus from "../../assets/icons/plus.svg";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+export default function Home({ setCompany }: { setCompany?: any }) {
   const navigate = useNavigate();
   const [companiesList, setCompaniesList] = useState([]);
 
@@ -42,17 +41,17 @@ export default function Home() {
         <h1 className="w-full text-2xl text-center">Selecione uma empresa</h1>
         <div className="flex flex-wrap justify-around py-4 gap-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-purpleDark w-full max-h-[calc(100vh-12rem)]">
           {companiesList.length
-            ? companiesList.map(({ company: { id, logo, name } }, key) => {
+            ? companiesList.map(({ company }, key) => {
                 return (
                   <div
                     className="w-40 h-40 cursor-pointer rounded-3xl "
                     key={key}
+                    onClick={() => {
+                      navigate("/info");
+                      setCompany(company);
+                    }}
                   >
-                    <Company
-                      img={logo || building}
-                      name={name}
-                      classNameH2={true}
-                    />
+                    <Company company={company} classNameH2={true} />
                   </div>
                 );
               })

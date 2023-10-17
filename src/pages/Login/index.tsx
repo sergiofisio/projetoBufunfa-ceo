@@ -32,10 +32,11 @@ const Login = () => {
       }, 4000);
 
       if (stayConnected) {
+        setItem("id", login.data.user.id, true);
         setItem("name", login.data.user.name, true);
         return setItem("token", login.data.token, true);
       }
-
+      setItem("id", login.data.user.id, true);
       setItem("name", login.data.name);
       setItem("token", login.data.token);
     } catch (error: any) {
@@ -47,14 +48,16 @@ const Login = () => {
   }
 
   return (
-    <div className={`w-full min-h-full  flex flex-col justify-evenly`}>
+    <div
+      className={`w-full min-h-full  flex flex-col justify-evenly bg-purpleDark`}
+    >
       <DefaultHeader />
-      <div className={`w-full flex flex-col`}>
+      <div className={`w-full h-96 flex flex-col gap-10 `}>
         <form
           onSubmit={handleSubmit}
-          className={`flex flex-col justify-around items-center gap-6 px-8`}
+          className={`flex flex-col justify-around items-center gap-6 px-8 min-h-full`}
         >
-          <div className="w-full flex flex-col items-center justify-center gap-4">
+          <div className="w-full h-full flex flex-col items-center justify-center gap-4">
             <Input
               label="Email"
               labelClassName="text-white"
@@ -74,7 +77,7 @@ const Login = () => {
             </Link>
           </div>
           <div
-            onClick={(e) => setStayConnected(!stayConnected)}
+            onClick={() => setStayConnected(!stayConnected)}
             className={`w-full flex items-center cursor-pointer`}
           >
             <input
