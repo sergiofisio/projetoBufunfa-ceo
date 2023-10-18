@@ -40,7 +40,7 @@ const Signup = () => {
       const signup = await axiosPrivate.post("/register/ceo", {
         name,
         email,
-        cpfCnpj,
+        cpf: cpfCnpj,
         password,
       });
 
