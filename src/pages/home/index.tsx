@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import axiosPrivate from "../../connection";
+import AxiosInstance from "../../connection";
 import Company from "./../../components/company/company";
 import plus from "../../assets/icons/plus.svg";
 import { useNavigate } from "react-router-dom";
+import { setItem } from "../../utils/storage";
 
 export default function Home({ setCompany }: { setCompany?: any }) {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Home({ setCompany }: { setCompany?: any }) {
       data: {
         ceo: { companies },
       },
-    } = await axiosPrivate.get("/userInfo/ceo", {
+    } = await AxiosInstance.axiosPrivate.get("/userInfo/ceo", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -41,7 +42,7 @@ export default function Home({ setCompany }: { setCompany?: any }) {
         <h1 className="w-full text-2xl text-center">Selecione uma empresa</h1>
         <div className="flex flex-wrap justify-around py-4 gap-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-purpleDark w-full max-h-[calc(100vh-12rem)]">
           {companiesList.length
-            ? companiesList.map(({ company }, key) => {
+            ? companiesList.map(({ company }: any, key) => {
                 return (
                   <div
                     className="w-40 h-40 cursor-pointer rounded-3xl "
@@ -49,6 +50,7 @@ export default function Home({ setCompany }: { setCompany?: any }) {
                     onClick={() => {
                       navigate("/info");
                       setCompany(company);
+                      setItem("company", company.id, true);
                     }}
                   >
                     <Company company={company} classNameH2={true} />

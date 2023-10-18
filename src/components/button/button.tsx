@@ -24,7 +24,7 @@ export default function Button({
         className={`flex items-center justify-evenly w-full h-10 transition-all duration-300 ease-in-out 
         ${
           color === "purple"
-            ? "bg-purpleDark text-white border-purpleDark hover:bg-white hover:text-purpleDark"
+            ? "bg-purpleDark text-white border-gold hover:bg-gold hover:text-purpleDark"
             : color === "gold"
             ? "bg-gold text-purpleDark border-goldDark hover:bg-transparent hover:text-goldDark"
             : "bg-transparent text-purpleDark border-transparent hover:bg-purpleDark hover:text-white"

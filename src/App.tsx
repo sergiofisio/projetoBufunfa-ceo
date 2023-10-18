@@ -9,6 +9,7 @@ import iconStepInactive from "./assets/stepInactive.svg";
 import { useEffect, useState } from "react";
 import Button from "./components/button/button";
 import { useNavigate } from "react-router-dom";
+import axiosInstances from "./connection";
 
 function App() {
   const navigate = useNavigate();
@@ -33,6 +34,12 @@ function App() {
     setTimeout(() => {
       setStep(2);
     }, 2000);
+
+    const initiService = async () => {
+      await axiosInstances.axiosInit.get("/");
+    };
+
+    initiService();
   }, []);
 
   return (
