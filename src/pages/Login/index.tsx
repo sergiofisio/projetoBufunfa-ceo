@@ -4,7 +4,7 @@ import Button from "../../components/button/button";
 import Input from "../../components/input/input";
 import { Link, useNavigate } from "react-router-dom";
 import { toastfy } from "../../hooks/toasfy";
-import axiosPrivate from "../../connection";
+import AxiosInstance from "../../connection";
 import { setItem } from "../../utils/storage";
 import userImg from "../../assets/user.svg";
 
@@ -22,7 +22,7 @@ const Login = () => {
       if (!email || !password) {
         throw new Error("Preencha todos os campos!");
       }
-      const login = await axiosPrivate.post("/login/ceo", {
+      const login = await AxiosInstance.axiosPrivate.post("/login/ceo", {
         email,
         password,
       });

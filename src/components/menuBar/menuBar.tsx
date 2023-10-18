@@ -17,7 +17,7 @@ export function MenuBar({
   setSelected?: any;
 }) {
   return (
-    <div className="w-[100%] flex items-center justify-around fixed bottom-0 gap-4 rounded-t-[11px] bg-purpleDark text-white">
+    <div className="w-[100%] flex items-center justify-around gap-4 rounded-t-[11px] bg-purpleDark text-white">
       <img
         onClick={() => setSelected("people")}
         className="w-[24px]"
