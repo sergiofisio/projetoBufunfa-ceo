@@ -33,7 +33,7 @@ export default function Home() {
         <h2 className="text-title text-white">
           Olá,
           <span className="text-gold">
-            {` ${localStorage.getItem("name")?.split(" ")[0] || "Sergio"}`}
+            {` ${localStorage.getItem("name")?.split(" ")[0] || ""}`}
           </span>
           !
         </h2>
