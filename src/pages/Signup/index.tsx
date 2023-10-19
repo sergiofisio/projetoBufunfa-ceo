@@ -4,8 +4,7 @@ import Button from "../../components/button/button";
 import Input from "../../components/input/input";
 import { useState } from "react";
 import { toastfy } from "../../hooks/toasfy";
-import axios from "axios";
-import axiosPrivate from "../../connection";
+import axiosInstance from "../../connection";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -33,47 +32,52 @@ const Signup = () => {
         cpfElement.textContent = "Formato inválido!";
       }
 
+      const cpfFormated = cpfCnpj.replace(/\D/g, "");
+
       if (password !== confirmPassword) {
         throw new Error("As senhas não coincidem!");
       }
 
-      const signup = await axiosPrivate.post("/register/ceo", {
+      await axiosInstance.axiosPrivate.post("/register/ceo", {
         name,
         email,
-        cpf: cpfCnpj,
+        cpf: cpfFormated,
         password,
       });
 
-      toastfy("success", "Conta criada!", "text-purple", 3000);
+      toastfy("success", "Conta criada com sucesso!", "text-purple", 3000);
 
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 4000);
     } catch (error: any) {
       if (error.response?.status === 400)
-        return toastfy("error", error.response.data.error, "toast-error", 3000);
+        return toastfy("error", error.response.data.message, "text-red", 3000);
 
       toastfy("error", error.message, "text-red", 3000);
     }
   };
   return (
-    <div className="w-full min-h-full  flex flex-col justify-evenly bg-purpleDark">
+    <div className="w-full h-full  flex flex-col justify-evenly bg-purpleDark">
       <DefaultHeader />
       <div className="w-full flex flex-col">
-        <form className="flex flex-col justify-around items-center gap-6 px-8">
-          <div className="w-full flex flex-col  gap-8 max-h-[340px] overflow-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col justify-evenly items-center gap-6 px-8"
+        >
+          <div className="w-full flex flex-col gap-8 overflow-auto">
             <Input
               set={setName}
               value={name}
               type="text"
-              label={"Nome completo"}
+              label="Nome completo"
               labelClassName={"text-white"}
             />
             <Input
-              type="text"
+              type="email"
               set={setEmail}
               value={email}
-              label={"Email"}
+              label="Email"
               labelClassName={"text-white"}
             />
             <Input
@@ -81,7 +85,7 @@ const Signup = () => {
               set={setCpfCnpj}
               mask="999.999.999-99"
               type="text"
-              label={"CPF/CNPJ"}
+              label="CPF"
               labelClassName={"text-white"}
               id={"cpfCnpj"}
             />
@@ -89,19 +93,19 @@ const Signup = () => {
               value={password}
               set={setPassword}
               type="password"
-              label={"Senha"}
+              label="Senha"
               labelClassName={"text-white"}
             />
             <Input
               value={confirmPassword}
               set={setConfirmPassword}
               type="password"
-              label={"Confirmar senha"}
+              label="Confirmar senha"
               labelClassName={"text-white"}
             />
           </div>
-          <Button text={"Criar conta"} type={"submit"} color="gold" />
-          <Link to={"/"} className="text-white text-xs underline">
+          <Button text="Criar conta" type="submit" color="gold" />
+          <Link to="/login" className="text-white text-xs underline">
             Já possuo uma conta
           </Link>
         </form>
