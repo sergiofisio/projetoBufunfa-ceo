@@ -11,6 +11,7 @@ export default function Input({
   value,
   required,
   mask,
+  id,
   ...props
 }: {
   label: string;
@@ -21,6 +22,7 @@ export default function Input({
   value: string | number;
   required?: boolean;
   mask?: string;
+  id?: string;
 }) {
   return (
     <div className="w-full text-white flex flex-col">
@@ -45,6 +47,7 @@ export default function Input({
           value={value}
           required={required ? true : false}
           onChange={(e) => set(e.target.value)}
+          id={id}
           {...props}
         />
       )}

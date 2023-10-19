@@ -1,5 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
+
 import logo from "./assets/logo.svg";
 import img1 from "./assets/imgWhat.svg";
 import imgCeo from "./assets/imgCeo.svg";
