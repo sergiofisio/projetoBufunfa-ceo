@@ -16,7 +16,6 @@ export default function CompanyEdit() {
   const [logo, setLogo] = useState("");
   const [salary, setSalary] = useState("0");
   const [background, setBackground] = useState("");
-  const [uploadImg, setUploadImg] = useState<File | null>(null);
 
   const getCompanyInfo = async () => {
     const {
@@ -40,22 +39,6 @@ export default function CompanyEdit() {
 
   async function updateCompanyInfo() {
     try {
-      if (uploadImg) {
-        const formData = new FormData();
-        formData.append("image", uploadImg);
-        const {
-          data: {
-            fileUpload: { Location },
-          },
-        } = await AxiosInstance.axiosPrivate.post(`/upload/ceo`, formData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        setLogo(Location);
-      }
-
       const response = await AxiosInstance.axiosPrivate.put(
         `/updateCompany/ceo/${getItem("company", true)}`,
         {
