@@ -157,7 +157,7 @@ export default function CompanyInfo({
                 companyFunctions.ceos.map(({ ceo }: { ceo: any }) => {
                   return (
                     <div key={ceo.id}>
-                      <CompanyPeople id={ceo.id} people={ceo} type="ceo" />;
+                      <CompanyPeople id={ceo.id} people={ceo} type="ceo" />
                     </div>
                   );
                 })}
@@ -166,7 +166,7 @@ export default function CompanyInfo({
                   ({ employee }: { employee: any }) => {
                     return (
                       <div key={employee.id}>
-                        <CompanyPeople id={employee.id} people={employee} />;
+                        <CompanyPeople id={employee.id} people={employee} />
                       </div>
                     );
                   }
