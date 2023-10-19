@@ -5,7 +5,7 @@ import plus from "../../assets/icons/plus.svg";
 import { useNavigate } from "react-router-dom";
 import { setItem } from "../../utils/storage";
 
-export default function Home({ setCompany }: { setCompany?: any }) {
+export default function Home() {
   const navigate = useNavigate();
   const [companiesList, setCompaniesList] = useState([]);
 
@@ -49,7 +49,6 @@ export default function Home({ setCompany }: { setCompany?: any }) {
                     key={key}
                     onClick={() => {
                       navigate("/info");
-                      setCompany(company);
                       setItem("company", company.id, true);
                     }}
                   >

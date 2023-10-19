@@ -1,7 +1,7 @@
 import { useState } from "react";
 import camera from "../../assets/icons/camera.svg";
-import Input from "./../../components/input/input";
-import Button from "../../components/button/button";
+import Input from "../input/input";
+import Button from "../button/button";
 import { toastfy } from "../../hooks/toasfy";
 import { NumberFormatValues, NumericFormat } from "react-number-format";
 import plus from "../../assets/icons/plus.svg";
