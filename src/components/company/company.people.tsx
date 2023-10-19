@@ -10,8 +10,6 @@ export default function CompanyPeople({
   people: any;
   type?: string;
 }) {
-  console.log(id);
-
   return (
     <div
       key={id}
