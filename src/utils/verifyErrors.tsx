@@ -7,7 +7,7 @@ export function validadeInputs(datas: any) {
       console.log(emailRegex.test(data.value as string));
 
       if (!emailRegex.test(data.value as string)) {
-        toastfy("O email é inválido!", "toast-error", 3000);
+        toastfy("error", "O email é inválido!", "toast-error", 3000);
         return true;
       }
     }

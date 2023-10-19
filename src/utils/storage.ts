@@ -3,8 +3,8 @@ export function setItem(key: string, value: string, local?: boolean) {
   sessionStorage.setItem(key, value);
 }
 
-export function getItem(key: string) {
-  if (localStorage.getItem(key)) return localStorage.getItem(key);
+export function getItem(key: string, local?: boolean) {
+  if (local) return localStorage.getItem(key);
   sessionStorage.getItem(key);
 }
 

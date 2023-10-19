@@ -6,10 +6,10 @@ import MainRoutes from "./routes.tsx";
 import { ToastContainer } from "react-toastify";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <MainRoutes />
     </BrowserRouter>
     <ToastContainer />
-  </React.StrictMode>
+  </>
 );

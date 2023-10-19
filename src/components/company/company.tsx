@@ -1,12 +1,16 @@
+import building from "../../assets/building.svg";
+
 export default function Company({
   classname,
   img,
   name,
+  company,
   classNameH2,
 }: {
   classname?: string;
   img?: string;
-  name: string;
+  name?: string;
+  company?: { img?: string; name: string };
   classNameH2?: boolean;
 }) {
   return (
@@ -16,14 +20,18 @@ export default function Company({
           classname ? classname : "p-2"
         }`}
       >
-        <img className={`w-full h-full`} src={img} alt="" />
+        <img
+          className={`w-full h-full`}
+          src={company?.img || img || building}
+          alt=""
+        />
       </div>
       <h2
         className={`text-center ${
           !classNameH2 ? classNameH2 : "truncate text-ellipsis"
         } w-11/12`}
       >
-        {name}
+        {company?.name || name}
       </h2>
     </div>
   );

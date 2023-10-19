@@ -6,7 +6,7 @@ import { toastfy } from "../../hooks/toasfy";
 import { NumberFormatValues, NumericFormat } from "react-number-format";
 import plus from "../../assets/icons/plus.svg";
 import minus from "../../assets/icons/minus.svg";
-import axiosPrivate from "../../connection";
+import AxiosInstance from "../../connection";
 
 export default function CompanyCreate() {
   const [step, setStep] = useState(1);
@@ -45,7 +45,7 @@ export default function CompanyCreate() {
       const salaryFormatted: any = Number(salary).toFixed(2);
       const salaryCents = salaryFormatted * 100;
 
-      const response = await axiosPrivate.post(
+      const response = await AxiosInstance.axiosPrivate.post(
         "/createCompany/ceo",
         {
           name,
