@@ -5,6 +5,7 @@ import CompanyCreate from "./pages/company/company.create";
 import { useState } from "react";
 import Login from "./pages/Login";
 import Company from "./pages/company/company";
+import Signup from "./pages/Signup";
 
 const MainRoutes = () => {
   const [company, setCompany] = useState("");

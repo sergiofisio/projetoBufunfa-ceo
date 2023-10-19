@@ -101,7 +101,7 @@ const Login = () => {
             <Button type={`submit`} color="gold" text="Fazer Login" />
             <Link
               className={`w-full flex text-center justify-center text-white`}
-              to={"/"}
+              to={"/signup"}
             >
               Criar conta
             </Link>
