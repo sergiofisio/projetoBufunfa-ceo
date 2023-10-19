@@ -6,17 +6,15 @@ import changeCompany from "../../assets/icons/update.svg";
 import iconPeople from "../../assets/icons/peopleGold.svg";
 import iconCoin from "../../assets/icons/coin.svg";
 import iconEdit from "../../assets/icons/editWhite.svg";
-import { getItem, setItem } from "../../utils/storage";
+import { getItem } from "../../utils/storage";
 import AxiosInstance from "../../connection";
 import { useNavigate } from "react-router-dom";
-import CompanyPeople from "./../company/company.people";
+import CompanyPeople from "./company.people";
 
 export default function CompanyInfo({
-  companyId,
   companyFunctions,
   setCompanyFunctions,
 }: {
-  companyId?: any;
   companyFunctions?: any;
   setCompanyFunctions?: any;
 }) {
@@ -69,7 +67,7 @@ export default function CompanyInfo({
     <>
       {companyInfo && (
         <>
-          <div className={`w-full h-[28.5%] relative bg-purpleDark`}>
+          <div className={`w-full min-h-[28%] relative bg-purpleDark`}>
             <header className="flex justify-between pt-5 px-2 absolute top-0 left-0 w-full">
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
                 <img
@@ -83,6 +81,9 @@ export default function CompanyInfo({
               </div>
               <div className="flex items-center gap-2">
                 <img
+                  onClick={() => {
+                    navigate("/editCompany");
+                  }}
                   className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg"
                   src={edit}
                   alt="icon Edit"
@@ -108,7 +109,7 @@ export default function CompanyInfo({
               alt={`background ${companyInfo.name}`}
             />
             <img
-              className="absolute -bottom-5 left-5 h-2/4 bg-white rounded-[100%] border-8 border-purpleDark"
+              className="absolute -bottom-5 left-5 h-24 w-24 bg-white rounded-[100%] border-8 border-purpleDark"
               src={companyInfo.logo || building}
               alt={`logo ${companyInfo.name}`}
             />
