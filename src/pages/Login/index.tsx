@@ -38,12 +38,12 @@ const Login = () => {
         photo = userImg;
       }
 
-      if (stayConnected) {
-        setItem("id", login.data.user.id, true);
-        setItem("name", login.data.user.name, true);
-        setItem("photo", photo, true);
-        return setItem("token", login.data.token, true);
-      }
+      // if (stayConnected) {
+      //   setItem("id", login.data.user.id);
+      //   setItem("name", login.data.user.name);
+      //   setItem("photo", photo);
+      //   return setItem("token", login.data.token);
+      // }
       setItem("id", login.data.user.id);
       setItem("name", login.data.name);
       setItem("photo", photo);
