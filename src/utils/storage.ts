@@ -1,29 +1,13 @@
-export function setItem(key: string, value: string, local?: boolean) {
-  if (local) {
-    window.localStorage.setItem(key, value);
-    return localStorage.setItem(key, value)
-  };
-  window.sessionStorage.setItem(key, value);
-  sessionStorage.setItem(key, value);
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export async function setItem(key: string, value: string) {
+  await AsyncStorage.setItem(key, JSON.stringify(value));
 }
 
-export function getItem(key: string, local?: boolean) {
-  if (local) {
-    window.localStorage.getItem(key);
-    return localStorage.getItem(key);
-  }
-  window.sessionStorage.getItem(key);
-  sessionStorage.getItem(key);
+export async function getItem(key: string) {
+  return await AsyncStorage.getItem(key);
 }
 
-export function clear() {
-  window.localStorage.clear();
-  window.sessionStorage.clear();
-  localStorage.clear();
-  sessionStorage.clear();
-}
-
-export function removeItem(key: string) {
-  localStorage.removeItem(key);
-  sessionStorage.removeItem(key);
+export async function clear() {
+  await AsyncStorage.clear();
 }
