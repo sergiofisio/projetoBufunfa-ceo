@@ -45,7 +45,7 @@ const Login = () => {
       //   return setItem("token", login.data.token);
       // }
       setItem("id", login.data.user.id);
-      setItem("name", login.data.name);
+      setItem("name", login.data.user.name);
       setItem("photo", photo);
       setItem("token", login.data.token);
     } catch (error: any) {
