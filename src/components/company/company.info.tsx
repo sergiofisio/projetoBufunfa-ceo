@@ -33,7 +33,7 @@ export default function CompanyInfo({
     const {
       data: { company },
     } = await AxiosInstance.axiosPrivate.get(
-      `/companyInfo/ceo/${getItem("company", true)}`,
+      `/companyInfo/ceo/${getItem("company")}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -72,11 +72,11 @@ export default function CompanyInfo({
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
                 <img
                   className="rounded-[100%] bg-white border-2 border-solid border-white w-8 h-8"
-                  src={getItem("photo", true) || ""}
-                  alt={`photo ${getItem("name", true)}`}
+                  src={companyInfo.logo || ""}
+                  alt={`photo ${getItem("name")}`}
                 />
                 <h2 className="text-gold truncate text-ellipsis">
-                  {getItem("name", true)?.split(" ")[0]}
+                  {companyInfo.name?.split(" ")[0]}
                 </h2>
               </div>
               <div className="flex items-center gap-2">
