@@ -9,7 +9,7 @@ import iconEdit from "../../assets/icons/editWhite.svg";
 import { getItem } from "../../utils/storage";
 import AxiosInstance from "../../connection";
 import { useNavigate } from "react-router-dom";
-import CompanyPeople from "./company.people";
+import CompanyPerson from "./company.person";
 
 export default function CompanyInfo({
   companyFunctions,
@@ -28,18 +28,22 @@ export default function CompanyInfo({
     slogan: "",
     salary: 0,
   });
+  const [photo, setPhoto] = useState<string | null>("");
+  const [name, setName] = useState<string | null>("");
 
   const getCompanyInfo = async () => {
     const {
       data: { company },
     } = await AxiosInstance.axiosPrivate.get(
-      `/companyInfo/ceo/${getItem("company")}`,
+      `/companyInfo/ceo/${await getItem("company")}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
+    setPhoto(await getItem("photo"));
+    setName(await getItem("name"));
 
     setCompanyInfo({
       name: company.name,
@@ -72,11 +76,11 @@ export default function CompanyInfo({
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
                 <img
                   className="rounded-[100%] bg-white border-2 border-solid border-white w-8 h-8"
-                  src={companyInfo.logo || ""}
+                  src={photo || ""}
                   alt={`photo ${getItem("name")}`}
                 />
                 <h2 className="text-gold truncate text-ellipsis">
-                  {companyInfo.name?.split(" ")[0]}
+                  {name?.split(" ")[0]}
                 </h2>
               </div>
               <div className="flex items-center gap-2">
@@ -157,7 +161,7 @@ export default function CompanyInfo({
                 companyFunctions.ceos.map(({ ceo }: { ceo: any }) => {
                   return (
                     <div key={ceo.id}>
-                      <CompanyPeople id={ceo.id} people={ceo} type="ceo" />
+                      <CompanyPerson id={ceo.id} person={ceo} type="ceo" />
                     </div>
                   );
                 })}
@@ -166,7 +170,7 @@ export default function CompanyInfo({
                   ({ employee }: { employee: any }) => {
                     return (
                       <div key={employee.id}>
-                        <CompanyPeople id={employee.id} people={employee} />
+                        <CompanyPerson id={employee.id} person={employee} />
                       </div>
                     );
                   }

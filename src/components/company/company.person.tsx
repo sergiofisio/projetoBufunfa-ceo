@@ -1,13 +1,13 @@
 import iconCeo from "../../assets/icons/ceoCompany.svg";
 import user from "../../assets/user.svg";
 
-export default function CompanyPeople({
+export default function CompanyPerson({
   id,
-  people,
+  person,
   type,
 }: {
   id: number;
-  people: any;
+  person: any;
   type?: string;
 }) {
   return (
@@ -22,10 +22,10 @@ export default function CompanyPeople({
       )}
       <img
         className=" w-20 h-20 rounded-[100%] bg-white"
-        src={people.photo || user}
-        alt={`photo ${people.name}`}
+        src={person.photo || user}
+        alt={`photo ${person.name}`}
       />
-      <h2 className="text-center text-gold text-textBody2">{people.name}</h2>
+      <h2 className="text-center text-gold text-textBody2">{person.name}</h2>
     </div>
   );
 }
