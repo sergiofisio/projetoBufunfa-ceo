@@ -44,6 +44,9 @@ const Login = () => {
       //   setItem("photo", photo);
       //   return setItem("token", login.data.token);
       // }
+
+      console.log(login.data.user.name);
+
       setItem("id", login.data.user.id);
       setItem("name", login.data.user.name);
       setItem("photo", photo);
