@@ -28,7 +28,7 @@ export default function HireEmployee({
       console.log(findEmployee);
 
       const hireEmployee = await AxiosInstance.axiosPrivate.put(
-        `/hireEmployee/ceo/${findEmployee.data.id}/${getItem("company", true)}`,
+        `/hireEmployee/ceo/${findEmployee.data.id}/${getItem("company")}`,
         {},
         {
           headers: {
