@@ -49,7 +49,7 @@ export default function Home() {
                     key={key}
                     onClick={() => {
                       navigate("/info");
-                      setItem("company", company.id, true);
+                      setItem("company", company.id);
                     }}
                   >
                     <Company company={company} classNameH2={true} />

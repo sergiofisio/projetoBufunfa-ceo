@@ -21,7 +21,7 @@ export default function CompanyEdit() {
     const {
       data: { company },
     } = await AxiosInstance.axiosPrivate.get(
-      `/companyInfo/ceo/${getItem("company", true)}`,
+      `/companyInfo/ceo/${getItem("company")}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,7 +40,7 @@ export default function CompanyEdit() {
   async function updateCompanyInfo() {
     try {
       const response = await AxiosInstance.axiosPrivate.put(
-        `/updateCompany/ceo/${getItem("company", true)}`,
+        `/updateCompany/ceo/${getItem("company")}`,
         {
           name,
           cnpj,

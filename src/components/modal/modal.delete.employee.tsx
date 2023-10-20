@@ -14,7 +14,7 @@ export default function ModalDeleteEmployee({
       `deleteEmployee/ceo/${id}/${sessionStorage.getItem("company")}`,
       {
         headers: {
-          Authorization: `Bearer ${getItem("token", true)}`,
+          Authorization: `Bearer ${getItem("token")}`,
         },
       }
     );
