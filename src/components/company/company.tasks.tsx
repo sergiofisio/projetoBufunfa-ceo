@@ -5,13 +5,15 @@ import plus from "../../assets/icons/plus.svg";
 import Task from "../task/task";
 import { useState } from "react";
 import TaskFunctions from "../task/task.function";
+import TaskDelete from "../task/task.delete";
 
 export default function CompanyTasks({ tasks }: { tasks: any }) {
   const [showModal, setShowModal] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState("");
   return (
-    <div className="w-full h-5/6 relative">
+    <div className="w-full h-5/6">
       <HeaderCompany img={imgTask} text="Lista de tarefas" />
-      <div className="w-full h-[90%] overflow-y-scroll scrollbar-thin scrollbar-thumb-purpleDark">
+      <div className="w-full max-h-[85%] overflow-y-scroll scrollbar-thin scrollbar-thumb-purpleDark">
         <div className="p-4 flex flex-col gap-4">
           <Button text="Validar tarefas" color="purple" />
           <div
@@ -39,6 +41,7 @@ export default function CompanyTasks({ tasks }: { tasks: any }) {
                 value={task.value}
                 classname={key % 2 === 0 ? "" : "bg-[#E9E9EA]"}
                 setShowModal={setShowModal}
+                setShowModalDelete={setShowModalDelete}
               />
             </div>
           );
@@ -46,6 +49,12 @@ export default function CompanyTasks({ tasks }: { tasks: any }) {
       </div>
       {showModal && (
         <TaskFunctions setShowModal={setShowModal} id={showModal} />
+      )}
+      {showModalDelete && (
+        <TaskDelete
+          setShowModalDelete={setShowModalDelete}
+          id={showModalDelete}
+        />
       )}
     </div>
   );

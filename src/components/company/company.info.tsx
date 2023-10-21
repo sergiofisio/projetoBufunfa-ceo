@@ -71,7 +71,9 @@ export default function CompanyInfo({
     <>
       {companyInfo && (
         <>
-          <div className={`w-full min-h-[28%] relative bg-purpleDark`}>
+          <div
+            className={`w-full min-h-[30%] max-h-[30%] relative bg-purpleDark`}
+          >
             <header className="flex justify-between pt-5 px-2 absolute top-0 left-0 w-full">
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
                 <img

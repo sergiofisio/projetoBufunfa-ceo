@@ -8,6 +8,7 @@ export default function Task({
   description,
   value,
   setShowModal,
+  setShowModalDelete,
 }: {
   classname?: string;
   id?: number;
@@ -15,6 +16,7 @@ export default function Task({
   description?: string;
   value?: number;
   setShowModal: any;
+  setShowModalDelete: any;
 }) {
   {
     return (
@@ -42,7 +44,10 @@ export default function Task({
             src={gearWhite}
             alt="icon edit"
           />
-          <h2 className="w-8 h-8 p-1 bg-purpleDark rounded-[100%] text-white flex items-center justify-center">
+          <h2
+            onClick={() => setShowModalDelete(id)}
+            className="w-8 h-8 p-1 bg-purpleDark rounded-[100%] text-white flex items-center justify-center"
+          >
             X
           </h2>
         </div>

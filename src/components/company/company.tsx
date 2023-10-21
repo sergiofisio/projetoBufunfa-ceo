@@ -10,7 +10,7 @@ export default function Company({
   classname?: string;
   img?: string;
   name?: string;
-  company?: { img?: string; name: string };
+  company?: { logo?: string; name: string };
   classNameH2?: boolean;
 }) {
   return (
@@ -21,8 +21,8 @@ export default function Company({
         }`}
       >
         <img
-          className={`w-full h-full`}
-          src={company?.img || img || building}
+          className={`w-full h-full rounded-[100%]`}
+          src={company?.logo || img || building}
           alt=""
         />
       </div>
