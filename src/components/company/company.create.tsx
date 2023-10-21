@@ -7,8 +7,10 @@ import { NumberFormatValues, NumericFormat } from "react-number-format";
 import plus from "../../assets/icons/plus.svg";
 import minus from "../../assets/icons/minus.svg";
 import AxiosInstance from "../../connection";
+import { useNavigate } from "react-router-dom";
 
 export default function CompanyCreate() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [cnpj, setCnpj] = useState("");
@@ -66,7 +68,7 @@ export default function CompanyCreate() {
 
       toastfy("success", response.data.mensagem, "text-purple", 3000);
       setTimeout(() => {
-        window.history.back();
+        navigate("/home");
       }, 3000);
     } catch (error: any) {
       setStep(Number(step) - 1);
