@@ -3,7 +3,7 @@ import imgTask from "../../assets/icons/task.svg";
 import Button from "../button/button";
 import plus from "../../assets/icons/plus.svg";
 import Task from "../task/task";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TaskFunctions from "../task/task.function";
 import TaskDelete from "../task/task.delete";
 

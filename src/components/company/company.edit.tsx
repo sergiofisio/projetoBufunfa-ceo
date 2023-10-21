@@ -7,8 +7,11 @@ import plusIcon from "../../assets/icons/plus.svg";
 import editBackground from "../../assets/icons/editBackground.svg";
 import Input from "../input/input";
 import Button from "../button/button";
+import { toastfy } from "../../hooks/toasfy";
+import { useNavigate } from "react-router-dom";
 
 export default function CompanyEdit() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [cnpj, setCnpj] = useState("");
   const [slogan, setSlogan] = useState("");
@@ -39,7 +42,7 @@ export default function CompanyEdit() {
 
   async function updateCompanyInfo() {
     try {
-      const response = await AxiosInstance.axiosPrivate.put(
+      await AxiosInstance.axiosPrivate.put(
         `/updateCompany/ceo/${await getItem("company")}`,
         {
           name,
@@ -56,7 +59,11 @@ export default function CompanyEdit() {
           },
         }
       );
-      console.log(response);
+      toastfy("success", "Dados da empresa atualizados", "text-green", 2000);
+
+      setTimeout(() => {
+        navigate("/info");
+      }, 3000);
     } catch (error: any) {
       console.log(error);
     }
@@ -91,7 +98,7 @@ export default function CompanyEdit() {
     getCompanyInfo();
   }, []);
   return (
-    <div className="w-screen h-screen flex flex-col  items-center">
+    <div className="w-screen h-screen flex flex-col items-center bg-white">
       <header className="bg-purpleDark w-full h-1/5 flex items-center rounded-b-3xl text-white p-4 gap-3">
         <img
           src={arrowBack}
