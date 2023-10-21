@@ -14,7 +14,7 @@ export default function Company() {
   });
 
   return (
-    <div className="w-full h-screen bg-white flex flex-col justify-between">
+    <div className="w-full h-[90%] bg-gradient-to-t from-purpleDark from-1% via-white via-10% to-white to-90% flex flex-col justify-between relative border-none">
       {selected === "home" && (
         <CompanyInfo
           companyFunctions={companyFunctions}

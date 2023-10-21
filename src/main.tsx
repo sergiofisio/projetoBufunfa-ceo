@@ -7,10 +7,12 @@ import { ToastContainer } from "react-toastify";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    <BrowserRouter>
-      {/* <InfinitySpin width="300" color="#00BFFF" /> */}
-      <MainRoutes />
-    </BrowserRouter>
-    <ToastContainer />
+    <div className="w-screen h-screen bg-purpleDark">
+      <BrowserRouter>
+        {/* <InfinitySpin width="300" color="#00BFFF" /> */}
+        <MainRoutes />
+      </BrowserRouter>
+      <ToastContainer />
+    </div>
   </>
 );

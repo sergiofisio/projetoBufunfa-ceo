@@ -44,10 +44,10 @@ function App() {
   }, []);
 
   return (
-    <div className="w-screen h-full bg-transparent flex items-center justify-center">
+    <div className="w-full h-[90%] bg-transparent flex items-center justify-center">
       <div
         className={`w-full h-full p-4 transition-all duration-500 ${
-          step === 1 ? "bg-purpleDark" : "bg-transparent"
+          step === 1 ? "bg-purpleDark" : "bg-white"
         } flex flex-col items-center justify-evenly gap-12`}
       >
         {step === 1 ? (

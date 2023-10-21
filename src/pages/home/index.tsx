@@ -28,8 +28,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-white">
-      <div className="flex items-center justify-center w-full h-32 rounded-b-3xl bg-purpleDark">
+    <div className="w-full h-[90%] bg-gradient-to-t from-purpleDark from-1% via-white via-10% to-white to-90%">
+      <div className="flex items-center justify-center w-full h-32 rounded-b-3xl bg-purpleDark ">
         <h2 className="text-title text-white">
           Olá,
           <span className="text-gold">
