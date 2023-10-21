@@ -21,7 +21,7 @@ export default function TaskDelete({
         }
       );
 
-      console.log(response);
+      toastfy("success", response.data.mensagem, "text-green", 3000);
     } catch (error: any) {
       console.log(error);
     }
