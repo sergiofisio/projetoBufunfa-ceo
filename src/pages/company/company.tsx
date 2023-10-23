@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { MenuBar } from "../../components/menuBar/menuBar";
-import CompanyInfo from "../../components/companyInfo/company.info";
+import CompanyInfo from "../../components/company/company.info";
 import EmployeesShow from "../../components/employees/employees.show";
-export default function Company({ company }: { company?: any }) {
+import CompanyTasks from "../../components/company/company.tasks";
+export default function Company() {
   const [selected, setSelected] = useState("home");
   const [companyFunctions, setCompanyFunctions] = useState({
     ceos: [],
@@ -11,11 +12,11 @@ export default function Company({ company }: { company?: any }) {
     expenses: [],
     loans: [],
   });
+
   return (
-    <div className="w-full h-screen bg-white flex flex-col justify-between">
+    <div className="w-full h-[90%] bg-gradient-to-t from-purpleDark from-1% via-white via-10% to-white to-90% flex flex-col justify-between relative border-none">
       {selected === "home" && (
         <CompanyInfo
-          companyId={company.id}
           companyFunctions={companyFunctions}
           setCompanyFunctions={setCompanyFunctions}
         />
@@ -23,6 +24,7 @@ export default function Company({ company }: { company?: any }) {
       {selected === "people" && (
         <EmployeesShow employees={companyFunctions.employees} />
       )}
+      {selected === "tasks" && <CompanyTasks tasks={companyFunctions.tasks} />}
       <MenuBar selected={selected} setSelected={setSelected} />
     </div>
   );

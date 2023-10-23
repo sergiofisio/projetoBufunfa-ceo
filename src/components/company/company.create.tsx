@@ -1,14 +1,16 @@
 import { useState } from "react";
 import camera from "../../assets/icons/camera.svg";
-import Input from "./../../components/input/input";
-import Button from "../../components/button/button";
+import Input from "../input/input";
+import Button from "../button/button";
 import { toastfy } from "../../hooks/toasfy";
 import { NumberFormatValues, NumericFormat } from "react-number-format";
 import plus from "../../assets/icons/plus.svg";
 import minus from "../../assets/icons/minus.svg";
 import AxiosInstance from "../../connection";
+import { useNavigate } from "react-router-dom";
 
 export default function CompanyCreate() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [cnpj, setCnpj] = useState("");
@@ -66,7 +68,7 @@ export default function CompanyCreate() {
 
       toastfy("success", response.data.mensagem, "text-purple", 3000);
       setTimeout(() => {
-        window.history.back();
+        navigate("/home");
       }, 3000);
     } catch (error: any) {
       setStep(Number(step) - 1);
@@ -86,16 +88,31 @@ export default function CompanyCreate() {
     }
   };
 
-  const handleChangeImg = (
+  const handleChangeImg = async (
     e: React.ChangeEvent<HTMLInputElement>,
     img: string
   ) => {
-    const file = e.target.files?.[0];
-    const imageUrl = file ? URL.createObjectURL(file) : "";
-    if (img === "background") return setBackground(imageUrl);
-
-    setLogo(imageUrl);
+    if (!e.target.files) {
+      return;
+    } else {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+      const {
+        data: {
+          fileUpload: { Location },
+        },
+      } = await AxiosInstance.axiosPrivate.post(`/upload/ceo`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (img === "background") return setBackground(Location);
+      setLogo(Location);
+    }
   };
+
   return (
     <div className="flex flex-col w-full min-h-full bg-white">
       <div className="flex items-center w-full h-32 rounded-b-3xl bg-purpleDark px-4">

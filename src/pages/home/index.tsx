@@ -5,7 +5,7 @@ import plus from "../../assets/icons/plus.svg";
 import { useNavigate } from "react-router-dom";
 import { setItem } from "../../utils/storage";
 
-export default function Home({ setCompany }: { setCompany?: any }) {
+export default function Home() {
   const navigate = useNavigate();
   const [companiesList, setCompaniesList] = useState([]);
 
@@ -28,12 +28,12 @@ export default function Home({ setCompany }: { setCompany?: any }) {
   }, []);
 
   return (
-    <div className="w-full h-full bg-white">
-      <div className="flex items-center justify-center w-full h-32 rounded-b-3xl bg-purpleDark">
+    <div className="w-full h-[90%] bg-gradient-to-t from-purpleDark from-1% via-white via-10% to-white to-90%">
+      <div className="flex items-center justify-center w-full h-32 rounded-b-3xl bg-purpleDark ">
         <h2 className="text-title text-white">
           Olá,
           <span className="text-gold">
-            {` ${localStorage.getItem("name")?.split(" ")[0] || "Sergio"}`}
+            {` ${localStorage.getItem("name")?.split(" ")[0] || ""}`}
           </span>
           !
         </h2>
@@ -49,8 +49,7 @@ export default function Home({ setCompany }: { setCompany?: any }) {
                     key={key}
                     onClick={() => {
                       navigate("/info");
-                      setCompany(company);
-                      setItem("company", company.id, true);
+                      setItem("company", company.id);
                     }}
                   >
                     <Company company={company} classNameH2={true} />

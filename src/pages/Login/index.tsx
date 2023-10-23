@@ -38,14 +38,8 @@ const Login = () => {
         photo = userImg;
       }
 
-      if (stayConnected) {
-        setItem("id", login.data.user.id, true);
-        setItem("name", login.data.user.name, true);
-        setItem("photo", photo, true);
-        return setItem("token", login.data.token, true);
-      }
       setItem("id", login.data.user.id);
-      setItem("name", login.data.name);
+      setItem("name", login.data.user.name);
       setItem("photo", photo);
       setItem("token", login.data.token);
     } catch (error: any) {
@@ -58,7 +52,7 @@ const Login = () => {
 
   return (
     <div
-      className={`w-full min-h-full  flex flex-col justify-evenly bg-purpleDark`}
+      className={`w-full h-[90%] flex flex-col justify-evenly bg-purpleDark`}
     >
       <DefaultHeader />
       <div className={`w-full h-96 flex flex-col gap-10 `}>

@@ -6,17 +6,15 @@ import changeCompany from "../../assets/icons/update.svg";
 import iconPeople from "../../assets/icons/peopleGold.svg";
 import iconCoin from "../../assets/icons/coin.svg";
 import iconEdit from "../../assets/icons/editWhite.svg";
-import { getItem, setItem } from "../../utils/storage";
+import { getItem } from "../../utils/storage";
 import AxiosInstance from "../../connection";
 import { useNavigate } from "react-router-dom";
-import CompanyPeople from "./../company/company.people";
+import CompanyPerson from "./company.person";
 
 export default function CompanyInfo({
-  companyId,
   companyFunctions,
   setCompanyFunctions,
 }: {
-  companyId?: any;
   companyFunctions?: any;
   setCompanyFunctions?: any;
 }) {
@@ -30,18 +28,22 @@ export default function CompanyInfo({
     slogan: "",
     salary: 0,
   });
+  const [photo, setPhoto] = useState<string | null>("");
+  const [name, setName] = useState<string | null>("");
 
   const getCompanyInfo = async () => {
     const {
       data: { company },
     } = await AxiosInstance.axiosPrivate.get(
-      `/companyInfo/ceo/${getItem("company", true)}`,
+      `/companyInfo/ceo/${await getItem("company")}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
+    setPhoto(await getItem("photo"));
+    setName(await getItem("name"));
 
     setCompanyInfo({
       name: company.name,
@@ -69,20 +71,25 @@ export default function CompanyInfo({
     <>
       {companyInfo && (
         <>
-          <div className={`w-full h-[28.5%] relative bg-purpleDark`}>
+          <div
+            className={`w-full min-h-[30%] max-h-[30%] relative bg-purpleDark`}
+          >
             <header className="flex justify-between pt-5 px-2 absolute top-0 left-0 w-full">
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
                 <img
                   className="rounded-[100%] bg-white border-2 border-solid border-white w-8 h-8"
-                  src={getItem("photo", true) || ""}
-                  alt={`photo ${getItem("name", true)}`}
+                  src={photo || ""}
+                  alt={`photo ${getItem("name")}`}
                 />
                 <h2 className="text-gold truncate text-ellipsis">
-                  {getItem("name", true)?.split(" ")[0]}
+                  {name?.split(" ")[0]}
                 </h2>
               </div>
               <div className="flex items-center gap-2">
                 <img
+                  onClick={() => {
+                    navigate("/editCompany");
+                  }}
                   className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg"
                   src={edit}
                   alt="icon Edit"
@@ -108,7 +115,7 @@ export default function CompanyInfo({
               alt={`background ${companyInfo.name}`}
             />
             <img
-              className="absolute -bottom-5 left-5 h-2/4 bg-white rounded-[100%] border-8 border-purpleDark"
+              className="absolute -bottom-5 left-5 h-24 w-24 bg-white rounded-[100%] border-8 border-purpleDark"
               src={companyInfo.logo || building}
               alt={`logo ${companyInfo.name}`}
             />
@@ -156,7 +163,7 @@ export default function CompanyInfo({
                 companyFunctions.ceos.map(({ ceo }: { ceo: any }) => {
                   return (
                     <div key={ceo.id}>
-                      <CompanyPeople id={ceo.id} people={ceo} type="ceo" />;
+                      <CompanyPerson id={ceo.id} person={ceo} type="ceo" />
                     </div>
                   );
                 })}
@@ -165,7 +172,7 @@ export default function CompanyInfo({
                   ({ employee }: { employee: any }) => {
                     return (
                       <div key={employee.id}>
-                        <CompanyPeople id={employee.id} people={employee} />;
+                        <CompanyPerson id={employee.id} person={employee} />
                       </div>
                     );
                   }

@@ -36,6 +36,7 @@ export default function Input({
       <div className="border-2 border-solid border-black rounded-3xl bg-white text-black resize-none outline-none p-2 overflow-auto flex">
         {type === "textarea" ? (
           <textarea
+            className=" bg-white outline-none w-full h-full text-black px-2"
             rows={3}
             placeholder={placeholder}
             value={value}
