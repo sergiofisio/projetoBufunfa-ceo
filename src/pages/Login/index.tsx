@@ -81,7 +81,10 @@ const Login = () => {
               set={setPassword}
               value={password}
             />
-            <Link to={"/"} className={`text-white text-xs underline`}>
+            <Link
+              to={"/recoveryPassword"}
+              className={`text-white text-xs underline`}
+            >
               Esqueci a minha senha
             </Link>
           </div>

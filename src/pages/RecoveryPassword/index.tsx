@@ -32,9 +32,10 @@ const RecoveryPassword = () => {
       <DefaultHeader />
       <div className="flex relative justify-center">
         <img
-          className="cursor-pointer"
+          className="cursor-pointer absolute left-[-2rem]"
           src={arrowBack}
           alt="Botão para voltar a página anterior"
+          onClick={() => window.history.back()}
         />
         <h1 className="text-white text-2xl pl-3">Recuperação de senha</h1>
       </div>
