@@ -3,6 +3,7 @@ import { MenuBar } from "../../components/menuBar/menuBar";
 import CompanyInfo from "../../components/company/company.info";
 import EmployeesShow from "../../components/employees/employees.show";
 import CompanyTasks from "../../components/company/company.tasks";
+import Expense from "../../components/company/company.expense";
 export default function Company() {
   const [selected, setSelected] = useState("home");
   const [companyFunctions, setCompanyFunctions] = useState({
@@ -25,6 +26,12 @@ export default function Company() {
         <EmployeesShow employees={companyFunctions.employees} />
       )}
       {selected === "tasks" && <CompanyTasks tasks={companyFunctions.tasks} />}
+      {selected === "money" && (
+        <Expense type="required" expenses={companyFunctions.expenses} />
+      )}
+      {selected === "cart" && (
+        <Expense type="shop" expenses={companyFunctions.expenses} />
+      )}
       <MenuBar selected={selected} setSelected={setSelected} />
     </div>
   );

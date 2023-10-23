@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Company from "./pages/company/company";
 import Signup from "./pages/Signup";
 import CompanyEdit from "./components/company/company.edit";
+import Expense from "./components/company/company.expense";
 
 const MainRoutes = () => {
   return (
@@ -17,6 +18,8 @@ const MainRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/info" element={<Company />} />
       <Route path="/editCompany" element={<CompanyEdit />} />
+      <Route path="/required" element={<Expense />} />
+      <Route path="/shop" element={<Expense />} />
     </Routes>
   );
 };

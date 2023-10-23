@@ -5,7 +5,7 @@ const url = "https://bufunfa.onrender.com";
 
 const axiosPrivate: Readonly<AxiosInstance> = axios.create({
   baseURL: url,
-  timeout: 5000,
+  timeout: 10000,
   headers: { "Content-Type": "application/json" },
 });
 const axiosInit: Readonly<AxiosInstance> = axios.create({
