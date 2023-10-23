@@ -8,6 +8,8 @@ export function toastfy(
   classname: string,
   time: number
 ) {
+  console.log({ type, msg, classname, time });
+
   toast[type](msg, {
     position: "bottom-center",
     autoClose: time,
