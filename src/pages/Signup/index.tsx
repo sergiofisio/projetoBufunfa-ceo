@@ -65,7 +65,7 @@ const Signup = () => {
           onSubmit={handleSubmit}
           className="flex flex-col justify-evenly items-center gap-6 px-8"
         >
-          <div className="w-full flex flex-col gap-8 overflow-auto">
+          <div className="w-full max-h-[320px] flex flex-col gap-8 overflow-auto">
             <Input
               set={setName}
               value={name}

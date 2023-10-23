@@ -6,6 +6,7 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import Company from "./pages/company/company";
 import Signup from "./pages/Signup";
+import RecoveryPassword from "./pages/RecoveryPassword";
 
 const MainRoutes = () => {
   const [company, setCompany] = useState("");
@@ -18,6 +19,7 @@ const MainRoutes = () => {
       <Route path="/newCompany" element={<CompanyCreate />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/info" element={<Company company={company} />} />
+      <Route path="/recoveryPassword" element={<RecoveryPassword />} />
     </Routes>
   );
 };
