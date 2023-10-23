@@ -1,7 +1,5 @@
-import { useState } from "react";
 import coinIcon from "../../assets/icons/coin.svg";
 import gearWhite from "../../assets/icons/gearWhite.svg";
-import format from "date-fns/format";
 
 export default function ExpenseInfo({
   classname,

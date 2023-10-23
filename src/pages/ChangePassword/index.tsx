@@ -49,7 +49,12 @@ const ChangePassword = () => {
           />
         </div>
         <div className="flex flex-col mt-10 s gap-3 relative bottom-[-2rem]">
-          <Button type="submit" color="gold" text="Alterar senha" />
+          <Button
+            onClick={handleSubmit}
+            type="submit"
+            color="gold"
+            text="Alterar senha"
+          />
           <Button type="button" color="purple" text="Cancelar" />
         </div>
       </form>
