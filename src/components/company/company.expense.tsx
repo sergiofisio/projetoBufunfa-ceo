@@ -3,9 +3,12 @@ import imgexpense2 from "../../assets/icons/cart.svg";
 import plus from "../../assets/icons/plus.svg";
 import { HeaderCompany } from "../header/header";
 import { useEffect, useState } from "react";
-import Task from "../task/task";
+import ExpensesFunctions from "../expense/expenses.functions";
+import ExpenseInfo from "../../components/expense/expense";
+import ShopItemInfo from "../expense/shop";
+import ModalDeleteExpense from "../expense/modal.delete.expense";
 
-export default function Expense({
+export default function ExpenseCompany({
   type,
   expenses,
 }: {
@@ -13,11 +16,13 @@ export default function Expense({
   expenses?: any;
 }) {
   const [showModal, setShowModal] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState("");
   const [expensesFiltered, setExpensesFiltered] = useState([]);
 
   useEffect(() => {
-    console.log(expenses);
-
+    if (expenses.length === 0) {
+      return setExpensesFiltered([]);
+    }
     if (type === "required") {
       setExpensesFiltered(
         expenses.filter((expense: any) => expense.expense.type === "fixo")
@@ -52,24 +57,52 @@ export default function Expense({
             </h2>
           </div>
         </div>
-        {expensesFiltered.length
-          ? expensesFiltered.map(({ expense }: any, key: number) => {
-              return (
-                <div key={key}>
-                  <Task
-                    id={expense.id}
-                    title={expense.title}
-                    description={expense.description}
-                    value={expense.value}
-                    classname={key % 2 === 0 ? "" : "bg-[#E9E9EA]"}
-                    setShowModal={setShowModal}
-                    setShowModalDelete={expense}
-                  />
-                </div>
-              );
-            })
-          : ""}
+        <div className={`flex flex-wrap justify-center w-full gap-4`}>
+          {type === "required"
+            ? expensesFiltered.length
+              ? expensesFiltered.map(({ expense }: any, key: number) => {
+                  return (
+                    <div key={key} className="w-full">
+                      <ExpenseInfo
+                        id={expense.id}
+                        title={expense.title}
+                        description={expense.description}
+                        date={expense.date}
+                        value={expense.value}
+                        classname={key % 2 === 0 ? "" : "bg-[#E9E9EA]"}
+                        setShowModal={setShowModal}
+                        setShowModalDelete={setShowModalDelete}
+                      />
+                    </div>
+                  );
+                })
+              : ""
+            : expensesFiltered.map(({ expense }: any, key: number) => {
+                return (
+                  <div key={key}>
+                    <ShopItemInfo
+                      expense={expense}
+                      setShowModal={setShowModal}
+                      setShowModalDelete={setShowModalDelete}
+                    />
+                  </div>
+                );
+              })}
+        </div>
       </div>
+      {showModal && (
+        <ExpensesFunctions
+          type={type}
+          setShowModal={setShowModal}
+          id={showModal}
+        />
+      )}
+      {showModalDelete && (
+        <ModalDeleteExpense
+          setShowModalDelete={setShowModalDelete}
+          id={showModalDelete}
+        />
+      )}
     </div>
   );
 }

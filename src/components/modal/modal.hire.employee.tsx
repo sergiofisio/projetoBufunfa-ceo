@@ -14,6 +14,14 @@ export default function HireEmployee({
 
   async function hireEmployee() {
     try {
+      if (!email)
+        return toastfy(
+          "error",
+          "O campo de email deve ser preenchido",
+          "bg-red-500",
+          3000
+        );
+      new Error();
       const findEmployee = await AxiosInstance.axiosPrivate.post(
         "/findEmployee/ceo",
         {
@@ -25,10 +33,9 @@ export default function HireEmployee({
           },
         }
       );
-      console.log(findEmployee);
 
       const hireEmployee = await AxiosInstance.axiosPrivate.put(
-        `/hireEmployee/ceo/${findEmployee.data.id}/${getItem("company")}`,
+        `/hireEmployee/ceo/${findEmployee.data.id}/${await getItem("company")}`,
         {},
         {
           headers: {
@@ -38,13 +45,16 @@ export default function HireEmployee({
       );
       toastfy("success", hireEmployee.data.mensagem, "bg-green-500", 3000);
       setTimeout(() => {
-        window.location.reload();
+        setEmail("");
       }, 3000);
     } catch (error: any) {
-      toastfy("error", error.response.data.error, "bg-red-500", 3000);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      if (error.response.status !== undefined) {
+        toastfy("error", error.response.data.error, "bg-red-500", 3000);
+        setTimeout(() => {
+          setEmail("");
+        }, 3000);
+        return;
+      }
     }
   }
   return (

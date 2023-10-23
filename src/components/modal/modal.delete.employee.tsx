@@ -11,10 +11,10 @@ export default function ModalDeleteEmployee({
 }) {
   async function deleteEmployee() {
     await AxiosInstance.axiosPrivate.delete(
-      `deleteEmployee/ceo/${id}/${sessionStorage.getItem("company")}`,
+      `deleteEmployee/ceo/${id}/${await getItem("company")}`,
       {
         headers: {
-          Authorization: `Bearer ${getItem("token")}`,
+          Authorization: `Bearer ${await getItem("token")}`,
         },
       }
     );
