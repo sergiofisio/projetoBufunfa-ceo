@@ -5,6 +5,8 @@ import CompanyCreate from "./components/company/company.create";
 import Login from "./pages/Login";
 import Company from "./pages/company/company";
 import Signup from "./pages/Signup";
+import RecoveryPassword from "./pages/RecoveryPassword";
+import ChangePassword from "./pages/ChangePassword";
 import CompanyEdit from "./components/company/company.edit";
 import Expense from "./components/company/company.expense";
 
@@ -17,6 +19,8 @@ const MainRoutes = () => {
       <Route path="/newCompany" element={<CompanyCreate />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/info" element={<Company />} />
+      <Route path="/recoveryPassword" element={<RecoveryPassword />} />
+      <Route path="/changePassword" element={<ChangePassword />} />
       <Route path="/editCompany" element={<CompanyEdit />} />
       <Route path="/required" element={<Expense />} />
       <Route path="/shop" element={<Expense />} />
