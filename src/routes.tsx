@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import RecoveryPassword from "./pages/RecoveryPassword";
 import ChangePassword from "./pages/ChangePassword";
 import CompanyEdit from "./components/company/company.edit";
+import Expense from "./components/company/company.expense";
 
 const MainRoutes = () => {
   return (
@@ -21,6 +22,8 @@ const MainRoutes = () => {
       <Route path="/recoveryPassword" element={<RecoveryPassword />} />
       <Route path="/changePassword" element={<ChangePassword />} />
       <Route path="/editCompany" element={<CompanyEdit />} />
+      <Route path="/required" element={<Expense />} />
+      <Route path="/shop" element={<Expense />} />
     </Routes>
   );
 };
