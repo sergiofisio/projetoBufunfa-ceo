@@ -76,7 +76,9 @@ export default function CompanyInfo({
           <div
             className={`w-full min-h-[30%] max-h-[30%] bg-purpleDark flex items-center justify-center relative`}
           >
-            <header className="flex justify-between pt-5 px-2 absolute top-0 left-0 w-full">
+            <header
+              className={`flex justify-between pt-5 px-2 absolute top-0 left-0 w-full z-[1]`}
+            >
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
                 <img
                   className="rounded-[100%] bg-white border-2 border-solid border-white w-8 h-8"
@@ -112,7 +114,7 @@ export default function CompanyInfo({
               </div>
             </header>
             <img
-              className="max-w-full max-h-full min-w-[50%]"
+              className="absolute top-0 h-full w-full"
               src={companyInfo.background || building}
               alt={`background ${companyInfo.name}`}
             />

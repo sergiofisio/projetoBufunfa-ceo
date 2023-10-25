@@ -14,7 +14,7 @@ export default function ModalEditSalary({
   console.log(salary);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
+    <div className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-10">
       <div className="bg-purpleDark w-80 h-60 rounded-2xl relative flex flex-col justify-evenly px-6 text-white">
         <h2
           onClick={() => setShowModalEdit("")}
