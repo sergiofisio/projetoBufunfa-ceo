@@ -10,6 +10,7 @@ import { getItem } from "../../utils/storage";
 import AxiosInstance from "../../connection";
 import { useNavigate } from "react-router-dom";
 import CompanyPerson from "./company.person";
+import ModalEditSalary from "../modal/modal.edit.salary";
 
 export default function CompanyInfo({
   companyFunctions,
@@ -30,6 +31,7 @@ export default function CompanyInfo({
   });
   const [photo, setPhoto] = useState<string | null>("");
   const [name, setName] = useState<string | null>("");
+  const [showModalEdit, setShowModalEdit] = useState(false);
 
   const getCompanyInfo = async () => {
     const {
@@ -70,9 +72,9 @@ export default function CompanyInfo({
   return (
     <>
       {companyInfo && (
-        <>
+        <div className="w-full h-full">
           <div
-            className={`w-full min-h-[30%] max-h-[30%] relative bg-purpleDark`}
+            className={`w-full min-h-[30%] max-h-[30%] bg-purpleDark flex items-center justify-center relative`}
           >
             <header className="flex justify-between pt-5 px-2 absolute top-0 left-0 w-full">
               <div className="flex items-center bg-purpleDark min-w-[8rem] max-w-[12rem] h-10 rounded-3xl px-2 gap-2 shadow-2xl shadow-whiteBg">
@@ -110,7 +112,7 @@ export default function CompanyInfo({
               </div>
             </header>
             <img
-              className="w-full h-full"
+              className="h-full w-1/2"
               src={companyInfo.background || building}
               alt={`background ${companyInfo.name}`}
             />
@@ -120,7 +122,7 @@ export default function CompanyInfo({
               alt={`logo ${companyInfo.name}`}
             />
           </div>
-          <div className="w-full h-full p-6 flex flex-col justify-evenly gap-3 overflow-y-scroll">
+          <div className="w-full max-h-[70%] h-full p-6 flex flex-col justify-evenly gap-3 overflow-y-scroll">
             <div className="bg-purpleDark w-full h-40 rounded-md text-gold text-subTitle py-4 px-2 flex flex-col">
               <div className="flex justify-between items-center w-full">
                 <h2 className="text-gold text-subTitle w-10/12">
@@ -152,7 +154,7 @@ export default function CompanyInfo({
               </div>
               <img
                 onClick={() => {
-                  console.log("clickEdit");
+                  setShowModalEdit(true);
                 }}
                 src={iconEdit}
                 alt="icon edit"
@@ -179,7 +181,13 @@ export default function CompanyInfo({
                 )}
             </div>
           </div>
-        </>
+          {showModalEdit && (
+            <ModalEditSalary
+              setShowModalEdit={setShowModalEdit}
+              value={companyInfo.salary}
+            />
+          )}
+        </div>
       )}
     </>
   );
