@@ -112,7 +112,7 @@ export default function CompanyInfo({
               </div>
             </header>
             <img
-              className="h-full w-1/2"
+              className="max-w-full max-h-full min-w-[50%]"
               src={companyInfo.background || building}
               alt={`background ${companyInfo.name}`}
             />
