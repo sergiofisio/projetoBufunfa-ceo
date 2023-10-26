@@ -21,7 +21,6 @@ function UserLogged({ redirectTo }: { redirectTo: string }) {
       const authToken = await getItem("token");
       setIsAuth(Boolean(authToken));
       setIsLoading(false);
-      console.log({ authToken, isAuth, isLoading });
     };
 
     checkAuth();
@@ -43,7 +42,6 @@ function ProtectRoute({ redirectTo }: { redirectTo: string }) {
       const authToken = await getItem("token");
       setIsAuth(Boolean(authToken));
       setIsLoading(false);
-      console.log({ authToken, isAuth, isLoading });
     };
 
     checkAuth();

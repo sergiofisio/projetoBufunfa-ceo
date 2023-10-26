@@ -2,6 +2,9 @@ import { useState } from "react";
 import { NumberFormatValues, NumericFormat } from "react-number-format";
 import minus from "../../assets/icons/minus.svg";
 import plus from "../../assets/icons/plus.svg";
+import { getItem } from "../../utils/storage";
+import AxiosInstance from "../../connection.tsx";
+import { toastfy } from "../../hooks/toasfy.tsx";
 
 export default function ModalEditSalary({
   setShowModalEdit,
@@ -11,19 +14,41 @@ export default function ModalEditSalary({
   value: string | number;
 }) {
   const [salary, setSalary] = useState(Number(value) / 100);
-  console.log(salary);
+
+  async function editSalary() {
+    try {
+      await AxiosInstance.axiosPrivate.put(
+        `/updateCompany/ceo/${await getItem("company")}`,
+        {
+          salary: salary * 100,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${await getItem("token")}`,
+          },
+        }
+      );
+      toastfy("success", "Salario atualizado", "text-green", 2000);
+
+      setShowModalEdit("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-10">
-      <div className="bg-purpleDark w-80 h-60 rounded-2xl relative flex flex-col justify-evenly px-6 text-white">
+      <div className="bg-purpleDark w-80 h-80 rounded-2xl relative flex flex-col justify-evenly px-6 text-white">
         <h2
-          onClick={() => setShowModalEdit("")}
+          onClick={() => {
+            editSalary();
+          }}
           className="bg-gold rounded-[100%] absolute top-2 right-2 w-4 h-4 font-bold flex items-center justify-center"
         >
           X
         </h2>
         <div className=" w-full h-full flex items-center justify-center">
-          <div className="w-full h-full flex flex-col items-center justify-center">
+          <div className="w-full h-full flex flex-col items-center justify-evenly">
             <label className="text-white text-subTitle2">Novo Salario</label>
             <NumericFormat
               className="outline-none text-center text-4xl text-gold bg-white w-1/2 border-white rounded-xl px-2 py-4"
@@ -43,7 +68,7 @@ export default function ModalEditSalary({
               <div
                 className="flex flex-col items-center"
                 onClick={() => {
-                  if (Number(salary) - 10 <= 0) return;
+                  if (Number(salary) - 10 <= 0) return setSalary(0);
                   setSalary(Number(salary) - 10);
                 }}
               >
@@ -68,6 +93,10 @@ export default function ModalEditSalary({
                 <h2 className="text-white">+10</h2>
               </div>
             </div>
+            <h2 className="text-white text-textBody text-center">
+              Feche esta sessão para salvar o novo valor do salário máximo da
+              empresa
+            </h2>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ export default function Company() {
     tasks: [],
     expenses: [],
     loans: [],
+    notify: [],
   });
 
   return (

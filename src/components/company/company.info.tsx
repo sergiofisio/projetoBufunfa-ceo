@@ -11,6 +11,7 @@ import AxiosInstance from "../../connection";
 import { useNavigate } from "react-router-dom";
 import CompanyPerson from "./company.person";
 import ModalEditSalary from "../modal/modal.edit.salary";
+import point from "../../assets/icons/point.svg";
 
 export default function CompanyInfo({
   companyFunctions,
@@ -32,6 +33,7 @@ export default function CompanyInfo({
   const [photo, setPhoto] = useState<string | null>("");
   const [name, setName] = useState<string | null>("");
   const [showModalEdit, setShowModalEdit] = useState(false);
+  const [noReadNotify, setNoReadNotify] = useState(false);
 
   const getCompanyInfo = async () => {
     const {
@@ -47,7 +49,7 @@ export default function CompanyInfo({
     setPhoto(await getItem("photo"));
     setName(await getItem("name"));
 
-    setCompanyInfo({
+    await setCompanyInfo({
       name: company.name,
       background: company.background,
       cnpj: company.cnpj,
@@ -57,18 +59,26 @@ export default function CompanyInfo({
       salary: company.salary,
     });
 
-    setCompanyFunctions({
+    await setCompanyFunctions({
       ceos: company.ceos,
       employees: company.companyEmployees,
       tasks: company.tasks,
       expenses: company.expenses,
       loans: company.loans,
+      notify: company.notify,
     });
   };
 
+  console.log(companyInfo.salary);
+
   useEffect(() => {
     getCompanyInfo();
-  }, []);
+    if (name) {
+      companyFunctions.notify.find((n: any) => {
+        if (!n.seen) return setNoReadNotify(true);
+      });
+    }
+  }, [name, showModalEdit]);
   return (
     <>
       {companyInfo && (
@@ -90,27 +100,40 @@ export default function CompanyInfo({
                 </h2>
               </div>
               <div className="flex items-center gap-2">
-                <img
-                  onClick={() => {
-                    navigate("/editCompany");
-                  }}
-                  className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg"
-                  src={edit}
-                  alt="icon Edit"
-                />
-                <img
-                  className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg"
-                  src={notify}
-                  alt="icon notify"
-                />
-                <img
-                  className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg"
-                  src={changeCompany}
-                  alt="icon change company"
-                  onClick={() => {
-                    navigate("/home");
-                  }}
-                />
+                <div className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg flex items-center justify-center">
+                  <img
+                    onClick={() => {
+                      navigate("/editCompany");
+                    }}
+                    src={edit}
+                    alt="icon Edit"
+                  />
+                </div>
+                <div className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg flex items-center justify-center relative">
+                  <img
+                    onClick={() => {
+                      console.log("teste");
+                    }}
+                    src={notify}
+                    alt="icon notify"
+                  />
+                  {noReadNotify && (
+                    <img
+                      className="absolute top-0 -right-1 w-4 h-4"
+                      src={point}
+                      alt="point"
+                    />
+                  )}
+                </div>
+                <div className="w-10 h-10 rounded-[100%] p-2 bg-purpleDark shadow-2xl shadow-whiteBg flex items-center justify-center">
+                  <img
+                    src={changeCompany}
+                    alt="icon change company"
+                    onClick={() => {
+                      navigate("/home");
+                    }}
+                  />
+                </div>
               </div>
             </header>
             <img
