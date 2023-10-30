@@ -35,12 +35,6 @@ function App() {
     setTimeout(() => {
       setStep(2);
     }, 2000);
-
-    const initiService = async () => {
-      await axiosInstances.axiosInit.get("/");
-    };
-
-    initiService();
   }, []);
 
   return (

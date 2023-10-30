@@ -10,7 +10,7 @@ const axiosPrivate: Readonly<AxiosInstance> = axios.create({
 });
 const axiosInit: Readonly<AxiosInstance> = axios.create({
   baseURL: url,
-  timeout: 20000,
+  timeout: 60000,
   headers: { "Content-Type": "application/json" },
 });
 
