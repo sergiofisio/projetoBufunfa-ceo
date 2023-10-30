@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Notify from "../notify/notify";
+import ModalAccept from "./modal.accept";
 
 export default function ModalNotify({
   employees,
@@ -9,6 +11,20 @@ export default function ModalNotify({
   modalNotify: any;
   setModalNotify: any;
 }) {
+  const [notify, setNotify] = useState<any>("");
+
+  function sortNotifications(notifications: any[]): any[] {
+    const seen = notifications
+      .filter((n) => !n.seen)
+      .sort((a, b) => b.id - a.id);
+    const notSeen = notifications
+      .filter((n) => n.seen)
+      .sort((a, b) => b.id - a.id);
+    return [...seen, ...notSeen];
+  }
+
+  console.log(notify);
+
   return (
     <div className="notify absolute top-0 left-0 w-full h-full bg-gray-50 flex flex-col items-center justify-center z-10">
       <header className="flex items-center w-full h-24 bg-purpleDark p-7 gap-6 relative">
@@ -21,12 +37,17 @@ export default function ModalNotify({
         </h2>
       </header>
       <div className="w-full h-[calc(100%-4rem)] flex flex-col gap-3 p-6 overflow-y-scroll scrollbar-thin scrollbar-thumb-purpleDark">
-        {modalNotify.map((n: any) => (
+        {sortNotifications(modalNotify).map((n: any) => (
           <div className="w-full h-28" key={n.id}>
-            <Notify employees={employees} notify={n} />
+            <Notify
+              setShowNotify={setNotify}
+              employees={employees}
+              notify={n}
+            />
           </div>
         ))}
       </div>
+      {notify && <ModalAccept notify={notify} setShowModal={setNotify} />}
     </div>
   );
 }

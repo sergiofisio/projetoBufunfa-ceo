@@ -4,9 +4,11 @@ import userImg from "../../assets/user.svg";
 export default function Notify({
   employees,
   notify,
+  setShowNotify,
 }: {
   employees: any;
   notify: any;
+  setShowNotify: any;
 }) {
   const [employeeInfo, setEmployeeInfo] = useState<any>([]);
 
@@ -29,7 +31,7 @@ export default function Notify({
           <div
             className="flex items-center w-full h-full gap-5"
             onClick={() => {
-              console.log(notify);
+              setShowNotify(notify);
             }}
           >
             <img

@@ -50,6 +50,8 @@ export default function CompanyInfo({
         },
       }
     );
+    console.log(company);
+
     setPhoto(await getItem("photo"));
     setName(await getItem("name"));
 
@@ -73,16 +75,17 @@ export default function CompanyInfo({
     });
   };
 
-  console.log(companyInfo);
-
   useEffect(() => {
-    getCompanyInfo();
     if (name) {
       companyFunctions.notify.find((n: any) => {
         if (!n.seen) return setNoReadNotify(true);
       });
+      console.log(loading);
+
       setLoading(true);
+      console.log(loading);
     }
+    getCompanyInfo();
   }, [name, showModalEdit]);
   return (
     <>

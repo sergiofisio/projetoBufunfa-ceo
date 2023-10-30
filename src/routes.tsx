@@ -28,6 +28,8 @@ function UserLogged({ redirectTo }: { redirectTo: string }) {
           },
         });
       } catch (error: any) {
+        console.log(error);
+
         if (error.response.status === 401) {
           toastfy("error", "Sua sessão expirou", "text-red", 3000);
           await clear();
@@ -85,7 +87,6 @@ export default function MainRoutes() {
       const {
         data: { initial },
       } = await AxiosInstance.axiosInit.get("/");
-      console.log(initial);
 
       if (initial) {
         setInit(true);

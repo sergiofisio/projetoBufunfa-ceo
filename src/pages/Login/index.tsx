@@ -58,7 +58,7 @@ const Login = ({ init }: { init: boolean }) => {
     >
       {!init ? (
         <>
-          <PulseLoader color="white" loading={init} aria-label="Carregado" />
+          <PulseLoader color="white" aria-label="Carregado" />
         </>
       ) : (
         <>

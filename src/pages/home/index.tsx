@@ -44,7 +44,7 @@ export default function Home({ init }: { init: boolean }) {
     <div className="w-full h-[90%] bg-gradient-to-t from-purpleDark from-1% via-white via-10% to-white to-90%">
       {!init ? (
         <>
-          <PulseLoader color="#240046" loading={init} aria-label="Carregado" />
+          <PulseLoader color="#240046" />
         </>
       ) : (
         <>
