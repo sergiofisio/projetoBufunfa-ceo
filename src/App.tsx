@@ -10,7 +10,6 @@ import iconStepInactive from "./assets/stepInactive.svg";
 import { useEffect, useState } from "react";
 import Button from "./components/button/button";
 import { useNavigate } from "react-router-dom";
-import axiosInstances from "./connection";
 
 function App() {
   const navigate = useNavigate();
