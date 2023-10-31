@@ -7,6 +7,7 @@ import minus from "../../assets/icons/minus.svg";
 import plus from "../../assets/icons/plus.svg";
 import { getItem } from "../../utils/storage";
 import { toastfy } from "../../hooks/toasfy";
+import { PulseLoader } from "react-spinners";
 
 export default function ExpensesFunctions({
   type,
@@ -26,7 +27,7 @@ export default function ExpensesFunctions({
     try {
       const {
         data: {
-          expense: { title, description, value, date },
+          info: { title, description, value, date },
         },
       } = await AxiosInstance.axiosPrivate.get(
         `/functionInfo/ceo/expense/${id}`,
@@ -97,7 +98,7 @@ export default function ExpensesFunctions({
       >
         x
       </h2>
-      <div className="h-[20%] w-full flex items-center justify-center">
+      <div className="min-h-[20%] w-full flex items-center justify-center">
         <h2 className="text-title text-white text-center">
           {type === "required"
             ? typeof id === "number"
@@ -111,99 +112,106 @@ export default function ExpensesFunctions({
             : ""}
         </h2>
       </div>
-      <div className="h-full flex flex-col justify-evenly gap-4">
-        <div className="flex flex-col gap-4">
-          <Input
-            label="Título"
-            labelClassName="text-white"
-            type="text"
-            set={setTitle}
-            value={title}
-          />
-          <Input
-            label="Descrição"
-            labelClassName="text-white"
-            type="textarea"
-            set={setDescription}
-            value={description}
-          />
+      {!title && typeof id === "number" ? (
+        <div>
+          <PulseLoader color="white" />
+          <h2 className="text-white text-subTitle">Carregando</h2>
         </div>
-        <div className="flex flex-col items-center gap-4">
-          {type === "required" ? (
-            <>
-              <label className="text-white text-subTitle2">
-                Dia de vencimento
-              </label>
-              <input
-                className="w-40 h-10 text-center p-2 text-title rounded-3xl"
-                type="number"
-                onChange={(e) => {
-                  [
-                    Number(e.target.value) <= 0
-                      ? setDueDate("")
-                      : setDueDate(e.target.value),
-                  ];
+      ) : (
+        <div className="h-full flex flex-col justify-evenly gap-4">
+          <div className="flex flex-col gap-4">
+            <Input
+              label="Título"
+              labelClassName="text-white"
+              type="text"
+              set={setTitle}
+              value={title}
+            />
+            <Input
+              label="Descrição"
+              labelClassName="text-white"
+              type="textarea"
+              set={setDescription}
+              value={description}
+            />
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            {type === "required" ? (
+              <>
+                <label className="text-white text-subTitle2">
+                  Dia de vencimento
+                </label>
+                <input
+                  className="w-40 h-10 text-center p-2 text-title rounded-3xl"
+                  type="number"
+                  onChange={(e) => {
+                    [
+                      Number(e.target.value) <= 0
+                        ? setDueDate("")
+                        : setDueDate(e.target.value),
+                    ];
+                  }}
+                  value={dueDate}
+                />
+              </>
+            ) : (
+              ""
+            )}
+            <label className="text-white text-subTitle2">
+              {type === "required" ? "Valor" : "Preço do produto"}
+            </label>
+            <NumericFormat
+              className="outline-none text-center text-4xl text-gold bg-white w-1/2 border-white rounded-xl px-2 py-4"
+              value={value}
+              thousandSeparator="."
+              decimalSeparator=","
+              decimalScale={2}
+              fixedDecimalScale
+              allowNegative={false}
+              onValueChange={(values: NumberFormatValues) =>
+                setValue(values.floatValue || 0)
+              }
+              placeholder="$0,00"
+              defaultValue="0,00"
+            />
+            <div className="flex justify-around items-center gap-4 w-full">
+              <div
+                className="flex flex-col items-center"
+                onClick={() => {
+                  if (value <= 0) return;
+                  setValue(Number(value) - 10);
                 }}
-                value={dueDate}
-              />
-            </>
-          ) : (
-            ""
-          )}
-          <label className="text-white text-subTitle2">
-            {type === "required" ? "Valor" : "Preço do produto"}
-          </label>
-          <NumericFormat
-            className="outline-none text-center text-4xl text-gold bg-white w-1/2 border-white rounded-xl px-2 py-4"
-            value={value}
-            thousandSeparator="."
-            decimalSeparator=","
-            decimalScale={2}
-            fixedDecimalScale
-            allowNegative={false}
-            onValueChange={(values: NumberFormatValues) =>
-              setValue(values.floatValue || 0)
-            }
-            placeholder="$0,00"
-            defaultValue="0,00"
-          />
-          <div className="flex justify-around items-center gap-4 w-full">
-            <div
-              className="flex flex-col items-center"
-              onClick={() => {
-                if (value <= 0) return;
-                setValue(Number(value) - 10);
-              }}
-            >
-              <img
-                className="bg-white rounded-[100%] w-12 h-12 p-2"
-                src={minus}
-                alt="icon minus"
-              />{" "}
-              <h2 className="text-white">-10</h2>
-            </div>
-            <div
-              className="flex flex-col items-center"
-              onClick={() => {
-                setValue(Number(value) + 10);
-              }}
-            >
-              <img
-                className="bg-white rounded-[100%] w-12 h-12 p-2"
-                src={plus}
-                alt="icon plus"
-              />{" "}
-              <h2 className="text-white">+10</h2>
+              >
+                <img
+                  className="bg-white rounded-[100%] w-12 h-12 p-2"
+                  src={minus}
+                  alt="icon minus"
+                />{" "}
+                <h2 className="text-white">-10</h2>
+              </div>
+              <div
+                className="flex flex-col items-center"
+                onClick={() => {
+                  setValue(Number(value) + 10);
+                }}
+              >
+                <img
+                  className="bg-white rounded-[100%] w-12 h-12 p-2"
+                  src={plus}
+                  alt="icon plus"
+                />{" "}
+                <h2 className="text-white">+10</h2>
+              </div>
             </div>
           </div>
+          <Button
+            text={!id ? "Criar tarefa" : "Salvar alterações"}
+            type="submit"
+            color="gold"
+            onClick={typeof id === "boolean" ? createExpense : updateExpense}
+          />
         </div>
-        <Button
-          text={!id ? "Criar tarefa" : "Salvar alterações"}
-          type="submit"
-          color="gold"
-          onClick={typeof id === "boolean" ? createExpense : updateExpense}
-        />
-      </div>
+      )}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import AxiosInstance from "../../connection";
 import { getItem } from "../../utils/storage";
 import Button from "../button/button";
 import { toastfy } from "../../hooks/toasfy";
+import { PulseLoader } from "react-spinners";
 
 export default function TaskFunctions({
   setShowModal,
@@ -20,18 +21,22 @@ export default function TaskFunctions({
   const [value, setValue] = useState(0);
 
   async function getTaskInfo() {
-    const {
-      data: {
-        task: { title, description, value },
-      },
-    } = await AxiosInstance.axiosPrivate.get(`/functionInfo/ceo/task/${id}`, {
-      headers: {
-        Authorization: `Bearer ${await getItem("token")}`,
-      },
-    });
-    setTitle(title);
-    setDescription(description);
-    setValue(value / 100);
+    try {
+      const {
+        data: {
+          info: { title, description, value },
+        },
+      } = await AxiosInstance.axiosPrivate.get(`/functionInfo/ceo/task/${id}`, {
+        headers: {
+          Authorization: `Bearer ${await getItem("token")}`,
+        },
+      });
+      setTitle(title);
+      setDescription(description);
+      setValue(value / 100);
+    } catch (error: any) {
+      console.log(error);
+    }
   }
 
   async function createTask() {
@@ -101,81 +106,88 @@ export default function TaskFunctions({
       >
         x
       </h2>
-      <div className="h-[20%] w-full flex items-center justify-center">
+      <div className="min-h-[20%] w-full flex items-center justify-center">
         <h2 className="text-title text-white">
           {typeof id === "number" ? "Editar tarefa" : "Nova tarefa"}
         </h2>
       </div>
-      <div className="h-full flex flex-col justify-evenly gap-4">
-        <div className="flex flex-col gap-4">
-          <Input
-            label="Título"
-            labelClassName="text-white"
-            type="text"
-            set={setTitle}
-            value={title}
-          />
-          <Input
-            label="Descrição"
-            labelClassName="text-white"
-            type="textarea"
-            set={setDescription}
-            value={description}
-          />
+      {!title && typeof id === "number" ? (
+        <div>
+          <PulseLoader color="white" />
+          <h2 className="text-white text-subTitle">Carregando</h2>
         </div>
-        <div className="flex flex-col items-center gap-4">
-          <label className="text-white text-subTitle2">Valor da tarefa</label>
-          <NumericFormat
-            className="outline-none text-center text-4xl text-gold bg-white w-1/2 border-white rounded-xl px-2 py-4"
-            value={value}
-            thousandSeparator="."
-            decimalSeparator=","
-            decimalScale={2}
-            fixedDecimalScale
-            allowNegative={false}
-            onValueChange={(values: NumberFormatValues) =>
-              setValue(values.floatValue || 0)
-            }
-            placeholder="$0,00"
-            defaultValue="0,00"
-          />
-          <div className="flex justify-around items-center gap-4 w-full">
-            <div
-              className="flex flex-col items-center"
-              onClick={() => {
-                if (value <= 0) return;
-                setValue(Number(value) - 10);
-              }}
-            >
-              <img
-                className="bg-white rounded-[100%] w-12 h-12 p-2"
-                src={minus}
-                alt="icon minus"
-              />{" "}
-              <h2 className="text-white">-10</h2>
-            </div>
-            <div
-              className="flex flex-col items-center"
-              onClick={() => {
-                setValue(Number(value) + 10);
-              }}
-            >
-              <img
-                className="bg-white rounded-[100%] w-12 h-12 p-2"
-                src={plus}
-                alt="icon plus"
-              />{" "}
-              <h2 className="text-white">+10</h2>
+      ) : (
+        <div className="h-full flex flex-col justify-evenly gap-4">
+          <div className="flex flex-col gap-4">
+            <Input
+              label="Título"
+              labelClassName="text-white"
+              type="text"
+              set={setTitle}
+              value={title}
+            />
+            <Input
+              label="Descrição"
+              labelClassName="text-white"
+              type="textarea"
+              set={setDescription}
+              value={description}
+            />
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <label className="text-white text-subTitle2">Valor da tarefa</label>
+            <NumericFormat
+              className="outline-none text-center text-4xl text-gold bg-white w-1/2 border-white rounded-xl px-2 py-4"
+              value={value}
+              thousandSeparator="."
+              decimalSeparator=","
+              decimalScale={2}
+              fixedDecimalScale
+              allowNegative={false}
+              onValueChange={(values: NumberFormatValues) =>
+                setValue(values.floatValue || 0)
+              }
+              placeholder="$0,00"
+              defaultValue="0,00"
+            />
+            <div className="flex justify-around items-center gap-4 w-full">
+              <div
+                className="flex flex-col items-center"
+                onClick={() => {
+                  if (value <= 0) return;
+                  setValue(Number(value) - 10);
+                }}
+              >
+                <img
+                  className="bg-white rounded-[100%] w-12 h-12 p-2"
+                  src={minus}
+                  alt="icon minus"
+                />{" "}
+                <h2 className="text-white">-10</h2>
+              </div>
+              <div
+                className="flex flex-col items-center"
+                onClick={() => {
+                  setValue(Number(value) + 10);
+                }}
+              >
+                <img
+                  className="bg-white rounded-[100%] w-12 h-12 p-2"
+                  src={plus}
+                  alt="icon plus"
+                />{" "}
+                <h2 className="text-white">+10</h2>
+              </div>
             </div>
           </div>
+          <Button
+            text={!id ? "Criar tarefa" : "Salvar alterações"}
+            type="submit"
+            color="gold"
+            onClick={typeof id === "boolean" ? createTask : updateTaskInfo}
+          />
         </div>
-        <Button
-          text={!id ? "Criar tarefa" : "Salvar alterações"}
-          type="submit"
-          color="gold"
-          onClick={typeof id === "boolean" ? createTask : updateTaskInfo}
-        />
-      </div>
+      )}
     </div>
   );
 }

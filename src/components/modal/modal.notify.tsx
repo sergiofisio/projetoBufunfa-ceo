@@ -23,8 +23,6 @@ export default function ModalNotify({
     return [...seen, ...notSeen];
   }
 
-  console.log(notify);
-
   return (
     <div className="notify absolute top-0 left-0 w-full h-full bg-gray-50 flex flex-col items-center justify-center z-10">
       <header className="flex items-center w-full h-24 bg-purpleDark p-7 gap-6 relative">

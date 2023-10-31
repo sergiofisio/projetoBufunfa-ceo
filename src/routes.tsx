@@ -13,6 +13,7 @@ import { clear, getItem } from "./utils/storage";
 import { useEffect, useState } from "react";
 import AxiosInstance from "./connection";
 import { toastfy } from "./hooks/toasfy";
+import { PulseLoader } from "react-spinners";
 
 function UserLogged({ redirectTo }: { redirectTo: string }) {
   const navigate = useNavigate();
@@ -51,7 +52,12 @@ function UserLogged({ redirectTo }: { redirectTo: string }) {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        <PulseLoader color="white" />
+        <h2 className="text-white">Carregando</h2>
+      </div>
+    );
   }
 
   return isAuth ? <Navigate to={redirectTo} /> : <Outlet />;
@@ -72,7 +78,12 @@ function ProtectRoute({ redirectTo }: { redirectTo: string }) {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full flexflex-col items-center justify-center">
+        <PulseLoader color="white" />
+        <h2 className="text-white">Carregando</h2>
+      </div>
+    );
   }
 
   return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
@@ -81,8 +92,6 @@ function ProtectRoute({ redirectTo }: { redirectTo: string }) {
 export default function MainRoutes() {
   const [init, setInit] = useState(false);
   useEffect(() => {
-    console.log({ begin: init });
-
     const initiService = async () => {
       const {
         data: { initial },

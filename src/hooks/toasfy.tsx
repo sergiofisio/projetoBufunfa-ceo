@@ -12,6 +12,7 @@ export function toastfy(
     position: "bottom-center",
     autoClose: time,
     hideProgressBar: false,
+    pauseOnHover: false,
     closeOnClick: true,
     draggable: false,
     icon: false,
