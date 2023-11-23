@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
-// const url: Readonly<string> = "https://bufunfa.onrender.com";
-const url: Readonly<string> = "http://localhost:4000";
+const url: Readonly<string> = "https://bufunfa.onrender.com";
+// const url: Readonly<string> = "http://localhost:4000";
 
 const axiosPrivate: Readonly<AxiosInstance> = axios.create({
   baseURL: url,
